@@ -121,18 +121,6 @@ var dataset = [80, 100, 56, 120, 180, 30, 40, 120, 160];
 //     .style('fill', '#fff')
 //     .style('stroke', '#222');
 
-let standard = [
-    {standard: 1, color: 'yellow'}
-    {standard: 2, color: 'yellow'}
-    {standard: 3, color: 'yellow'}
-    {standard: 4, color: 'yellow'}
-    {standard: 5, color: 'yellow'}
-    {standard: 6, color: 'yellow'}
-    {standard: 7, color: 'yellow'}
-];
-
-let blanks = [1, 'white'];
-
 let colors = [
     'tomato', 'orange', 'violet', 'cornflowerblue',
     'slateblue', 'mediumseagreen', 'aqua', 'chartreuse',
@@ -140,9 +128,39 @@ let colors = [
     'deeppink', 'magenta', 'limegreen', 'red'
 ]
 
-let samples = 12;
-let dilutions = 2;
-let replicates = 3;
+let standard = [
+    {name: "stanard 1", color: 'yellow'},
+    {name: "stanard 2", color: 'yellow'},
+    {name: "stanard 3", color: 'yellow'},
+    {name: "stanard 4", color: 'yellow'},
+    {name: "stanard 5", color: 'yellow'},
+    {name: "stanard 6", color: 'yellow'},
+    {name: "stanard 7", color: 'yellow'}
+];
+
+let blanks = [{name: 'blank', color: 'white'}];
+
+const createDilutionData = (dilutionNum) => {
+    let dilutions = [];
+    for (let i = 0; i < dilutionNum; i++) {
+        dilutions.push(i + 1);
+    }
+    return dilutions;
+}
+
+const createSampleData = (sampleNum, replicates) => {
+    let samples = [];
+
+    for (let j = 0; j < replicates; j++) {
+        for (let i = 0; i < sampleNum; i++) {
+            samples.push({
+                name: `sample ${i + 1}`,
+                color: colors[i]
+            });
+        }
+    }
+    return samples;
+}
 
 const gridData = () => {
     let data = [];
