@@ -128,25 +128,16 @@ let colors = [
     'deeppink', 'magenta', 'limegreen', 'red'
 ]
 
-let standard = [
+let standardsBlank = [
     {name: "stanard 1", color: 'yellow'},
     {name: "stanard 2", color: 'yellow'},
     {name: "stanard 3", color: 'yellow'},
     {name: "stanard 4", color: 'yellow'},
     {name: "stanard 5", color: 'yellow'},
     {name: "stanard 6", color: 'yellow'},
-    {name: "stanard 7", color: 'yellow'}
+    {name: "stanard 7", color: 'yellow'},
+    {name: 'blank', color: 'white'}
 ];
-
-let blanks = [{name: 'blank', color: 'white'}];
-
-const createDilutionData = (dilutionNum) => {
-    let dilutions = [];
-    for (let i = 0; i < dilutionNum; i++) {
-        dilutions.push(i + 1);
-    }
-    return dilutions;
-}
 
 const createSampleData = (sampleNum, replicates) => {
     let samples = [];
@@ -161,6 +152,35 @@ const createSampleData = (sampleNum, replicates) => {
     }
     return samples;
 }
+
+const addDilution = (dilutionNum, sampleData) => {
+    let dilutionData = [];
+    console.log(sampleData);
+    for (let i = 0; i < dilutionNum; i++) {
+        for (let j = 0; j < sampleData.length; j++) {
+            dilutionData.push(sampleData[j]);
+        }
+    }
+    return dilutionData;
+}
+
+const standardCurveData = (replicates, standardsBlank) => {
+    let standards = [];
+    for (let i = 0; i < replicates; i++) {
+        for (let j = 0; j < standardsBlank.length; j++) {
+            standards.push(standardsBlank[j]);
+        }
+    }
+    return standards;
+}
+
+const createFinalData = (dilutionNum, sampleNum, replicates) => {
+    return standardCurveData(replicates, standardsBlank).concat(
+        addDilution(dilutionNum, createSampleData(sampleNum, replicates))
+    );
+}
+
+console.log(createFinalData(2, 12, 3));
 
 const gridData = () => {
     let data = [];
