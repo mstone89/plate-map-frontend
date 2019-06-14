@@ -51,7 +51,12 @@ const standardCurveData = (replicates) => {
             }
         }
     }
-    return standards;
+    // https://stackoverflow.com/questions/6712034/sort-array-by-firstname-alphabetically-in-javascript
+    return standards.sort((a, b) => {
+        if (a.name < b.name) { return 1 }
+        if (a.name > b.name) { return - 1 }
+        return 0;
+    });
 }
 
 const createFinalData = (dilutionNum, sampleNum, replicates) => {
@@ -60,6 +65,7 @@ const createFinalData = (dilutionNum, sampleNum, replicates) => {
     );
 }
 
+//http://www.cagrimmett.com/til/2016/08/17/d3-lets-make-a-grid.html
 const finalizeGridData = (array) => {
     let finalArray = [];
     x = 1;
@@ -114,10 +120,11 @@ const gridIt = (rows, columns, array) => {
 
 let finalFinalData = gridIt(8, 12, finalizedData);
 
+
 let grid = d3.select('#grid')
     .append('svg')
     .attr('width', "612px")
-    .attr('height', "408px");
+    .attr('height', "408px")
 
 let row = grid.selectAll('.row')
     .data(finalFinalData)
@@ -134,3 +141,30 @@ let column = row.selectAll('.square')
     .attr('height', (d) => { return d.height })
     .style('fill', (d) => { return d.color })
     .style('stroke', '#fff');
+
+let keys = [['Standard Curves ', 7], ['Samples ', 12], ['Replicates ', 3], ['Dilutions ', 2], ['Blanks ', 1]]
+
+let values = [7, 12, 3, 2, 1];
+
+let legend = d3.select('#legend')
+    .append('svg')
+    .attr('width', 400)
+    .attr('height', 500);
+
+legend.selectAll('mydots')
+    .data(keys)
+    .enter()
+    .append('circle')
+        .attr('cx', 100)
+        .attr('cy', (d, i) => { return 100 + i * 25 })
+        .attr('r', 3)
+        .style('fill', 'black')
+
+legend.selectAll('mylabels')
+    .data(keys)
+    .enter()
+    .append('text')
+        .attr('x', 120)
+        .attr('y', (d, i) => { return 100 + i * 25 })
+        .style('fill', 'black')
+        .text((d) => { return d })
