@@ -1,7 +1,7 @@
-// /////////////////////////
-// TEST GRID
-// /////////////////////////
-
+// // /////////////////////////
+// // TEST GRID
+// // /////////////////////////
+//
 // const testGrid = () => {
 //     const data = [];
 //     let x = 1;
@@ -9,9 +9,9 @@
 //     let width = 50;
 //     let height = 50;
 //
-//     for (let row = 0; row < 10; row++) {
+//     for (let row = 0; row < 8; row++) {
 //         data.push([]);
-//         for (let column = 0; column < 10; column++) {
+//         for (let column = 0; column < 12; column++) {
 //             data[row].push({
 //                 x: x,
 //                 y: y,
@@ -31,8 +31,8 @@
 //
 // let grid = d3.select('#grid')
 //     .append('svg')
-//     .attr('width', 510)
-//     .attr('height', 510);
+//     .attr('width', "612px")
+//     .attr('height', "408px");
 //
 // // grid data returns an array that is comprised of 10 elements
 // let row = grid.selectAll('.row')
@@ -64,27 +64,27 @@ let colors = [
     'deeppink', 'magenta', 'limegreen', 'red'
 ]
 
-let standardsBlank = [
-    {name: "standard 1", color: 'yellow'},
-    {name: "standard 2", color: 'yellow'},
-    {name: "standard 3", color: 'yellow'},
-    {name: "standard 4", color: 'yellow'},
-    {name: "standard 5", color: 'yellow'},
-    {name: "standard 6", color: 'yellow'},
-    {name: "standard 7", color: 'yellow'},
-    {name: 'blank', color: 'white'}
-];
-
 const createSampleData = (sampleNum, replicates) => {
     let samples = [];
+    let x = 1;
+    let y = 1;
+    let width = 50;
+    let height = 50;
 
     for (let j = 0; j < replicates; j++) {
         for (let i = 0; i < sampleNum; i++) {
             samples.push({
                 name: `sample ${i + 1}`,
-                color: colors[i]
+                color: colors[i],
+                width: width,
+                height: height,
+                x: x,
+                y: y
             });
+            x += width;
         }
+        x = 1;
+        y += height;
     }
     return samples;
 }
@@ -99,32 +99,50 @@ const addDilution = (dilutionNum, sampleData) => {
     return dilutionData;
 }
 
-const standardCurveData = (replicates, standardsBlank) => {
+const standardCurveData = (replicates) => {
     let standards = [];
-    for (let i = 0; i < replicates; i++) {
-        for (let j = 0; j < standardsBlank.length; j++) {
-            standards.push(standardsBlank[j]);
-        }
-    }
-    return standards;
-}
-
-const createFinalData = (dilutionNum, sampleNum, replicates) => {
-    return standardCurveData(replicates, standardsBlank).concat(
-        addDilution(dilutionNum, createSampleData(sampleNum, replicates))
-    );
-}
-
-const gridData = () => {
-    let finalData = createFinalData(2, 12, 3);
-    let dataForGrid = [];
     let x = 1;
     let y = 1;
     let width = 50;
     let height = 50;
 
-    let rows = 8;
-    let columns = 12;
+    for (let i = 0; i < replicates; i++) {
+        for (let j = 0; j < 8; j++) {
+            if (j === 5 || j === 6 || j === 7) {
+                standards.push({
+                    name: 'blank',
+                    color: 'white',
+                    width: width,
+                    height: height,
+                    x: x,
+                    y: y
+                })
+            }
+            standards.push({
+                name: `standard ${i + 1}`,
+                color: 'yellow',
+                width: width,
+                height: height,
+                x: x,
+                y: y
+            });
+            x += width;
+        }
+        x = 1;
+        y += height;
+    }
+    return standards;
+}
+
+const createFinalData = (dilutionNum, sampleNum, replicates) => {
+    return standardCurveData(replicates).concat(
+        addDilution(dilutionNum, createSampleData(sampleNum, replicates))
+    );
+}
+
+const gridData = (rows, columns) => {
+    let finalData = createFinalData(2, 12, 3);
+    let dataForGrid = [];
 
     for (let row = 0; row < rows; row++) {
         dataForGrid.push([]);
@@ -133,29 +151,18 @@ const gridData = () => {
         }
     }
 
-    for (let row = 0; row < rows; row++) {
-        for (let column = 0; column < columns; column++) {
-            dataForGrid[row][column].x = x;
-            dataForGrid[row][column].y = y;
-            dataForGrid[row][column].width = width;
-            dataForGrid[row][column].height = height;
-            x += width;
-        }
-        x = 1;
-        y += height;
-    }
-
-    console.log(dataForGrid);
     return dataForGrid;
 }
 
+console.log(gridData(8, 12));
+
 let grid = d3.select('#grid')
     .append('svg')
-    .attr('width', 612)
-    .attr('height', 408);
+    .attr('width', "612px")
+    .attr('height', "408px");
 
 let row = grid.selectAll('.row')
-    .data(gridData())
+    .data(gridData(8, 12))
     .enter().append('g')
     .attr('class', 'row');
 
@@ -167,5 +174,5 @@ let column = row.selectAll('.square')
     .attr('y', (d) => { return d.y })
     .attr('width', (d) => { return d.width })
     .attr('height', (d) => { return d.height })
-    .style('fill', '#222')
+    .style('fill', (d) => { return d.color })
     .style('stroke', '#fff');
