@@ -18,7 +18,8 @@ class SavedPlates extends Component {
                 this.setState({
                     savedPlates: jsonData
                 });
-            });
+            })
+            .catch(err => console.log('view plates error: ', err));
     }
 
     componentDidMount = () => {
