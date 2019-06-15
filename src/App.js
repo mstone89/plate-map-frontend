@@ -7,6 +7,12 @@ import Plate from './components/Plate';
 import Plates from './components/Plates';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    
+
     render() {
         return (
             <div>
@@ -18,7 +24,7 @@ class App extends Component {
                     </nav>
                     <Switch>
                         <Route exact path="/" component={CreatePlate} />
-
+                        <Route path="/view/plates" component={(props) => <Plates samples={props} />}/>
                     </Switch>
                 </Router>
             </div>
@@ -29,4 +35,3 @@ class App extends Component {
 export default App;
 
 // <Route path="/view/:id" component={Plate} />
-// <Route path="/view/plates" component={Plates} />

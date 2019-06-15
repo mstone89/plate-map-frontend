@@ -19,12 +19,12 @@ class CreatePlate extends Component {
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut lorem imperdiet, maximus justo ultricies, dictum metus. Phasellus consequat, leo non molestie luctus, metus lectus mollis risus, eu molestie lorem velit sit amet sapien. Cras ultricies interdum ipsum. Curabitur tristique urna vel eros tincidunt, sed elementum mauris condimentum.</p>
                 </aside>
                 <Form>
-                    <h2>Create New Plate</h2>
+                    <h2>Create New Plates</h2>
                     <Form.Group>
                         <Form.Label>Samples:</Form.Label>
                         <Form.Control required type="number" />
                     </Form.Group>
-                    <Button variant="primary" type="submit">Create Plate</Button>
+                    <Button variant="primary" type="submit">See Combinations</Button>
                 </Form>
             </div>
         )
