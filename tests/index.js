@@ -152,29 +152,29 @@ let column = row.selectAll('.square')
     .style('fill', (d) => { return d.color })
     .style('stroke', '#fff');
 
-// let keys = [['Standard Curves ', 7], ['Samples ', 12], ['Replicates ', 3], ['Dilutions ', 2], 'Blanks']
-//
-// let values = [7, 12, 3, 2, 1];
-//
-// let legend = d3.select('#legend')
-//     .append('svg')
-//     .attr('width', 400)
-//     .attr('height', 500);
-//
-// legend.selectAll('mydots')
-//     .data(keys)
-//     .enter()
-//     .append('circle')
-//         .attr('cx', 100)
-//         .attr('cy', (d, i) => { return 100 + i * 25 })
-//         .attr('r', 3)
-//         .style('fill', 'black')
-//
-// legend.selectAll('mylabels')
-//     .data(keys)
-//     .enter()
-//     .append('text')
-//         .attr('x', 120)
-//         .attr('y', (d, i) => { return 100 + i * 25 })
-//         .style('fill', 'black')
-//         .text((d) => { return d })
+let keys = [['Standard Curves ', 7], ['Samples ', 12], ['Replicates ', 3], ['Dilutions ', 2], 'Blanks']
+
+let values = [7, 12, 3, 2, 1];
+
+let legend = d3.select('#legend')
+    .append('svg')
+    .attr('width', 400)
+    .attr('height', 500);
+
+legend.selectAll('mydots')
+    .data(keys)
+    .enter()
+    .append('circle')
+        .attr('cx', 100)
+        .attr('cy', (d, i) => { return 100 + i * 25 })
+        .attr('r', 3)
+        .style('fill', 'black')
+
+legend.selectAll('mylabels')
+    .data(keys)
+    .enter()
+    .append('text')
+        .attr('x', 120)
+        .attr('y', (d, i) => { return 100 + i * 25 })
+        .style('fill', 'black')
+        .text((d) => { return d })
