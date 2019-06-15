@@ -102,7 +102,7 @@ const finalizeGridData = (array) => {
 }
 
 const gridData = (rows, columns) => {
-    let finalData = createFinalData(3, 11, 2);
+    let finalData = createFinalData(3, 2, 6);
     let dataForGrid = [];
 
     for (let row = 0; row < rows; row++) {
@@ -152,29 +152,58 @@ let column = row.selectAll('.square')
     .style('fill', (d) => { return d.color })
     .style('stroke', '#fff');
 
-let keys = [['Standard Curves ', 7], ['Samples ', 12], ['Replicates ', 3], ['Dilutions ', 2], 'Blanks']
+// let keys = [['Standard Curves ', 7], ['Samples ', 12], ['Replicates ', 3], ['Dilutions ', 2], 'Blanks']
+//
+// let values = [7, 12, 3, 2, 1];
+//
+// let legend = d3.select('#legend')
+//     .append('svg')
+//     .attr('width', 400)
+//     .attr('height', 500);
+//
+// legend.selectAll('mydots')
+//     .data(keys)
+//     .enter()
+//     .append('circle')
+//         .attr('cx', 100)
+//         .attr('cy', (d, i) => { return 100 + i * 25 })
+//         .attr('r', 3)
+//         .style('fill', 'black')
+//
+// legend.selectAll('mylabels')
+//     .data(keys)
+//     .enter()
+//     .append('text')
+//         .attr('x', 120)
+//         .attr('y', (d, i) => { return 100 + i * 25 })
+//         .style('fill', 'black')
+//         .text((d) => { return d })
 
-let values = [7, 12, 3, 2, 1];
 
-let legend = d3.select('#legend')
-    .append('svg')
-    .attr('width', 400)
-    .attr('height', 500);
+// Knowing a certain standard curve, given a number of samples, how many combos of replicates/dilutions without going over 96?
 
-legend.selectAll('mydots')
-    .data(keys)
-    .enter()
-    .append('circle')
-        .attr('cx', 100)
-        .attr('cy', (d, i) => { return 100 + i * 25 })
-        .attr('r', 3)
-        .style('fill', 'black')
+const generatePlateCombos = (sampleNum) => {
+    const standards = 8;
+    const combos = [];
+    const replicatesArray = [2, 3, 4, 5, 6];
+    const dilutionsArray = [1, 2, 3, 4];
+    for (let i = 0; i < replicatesArray.length; i++) {
+        for (let j = 0; j < dilutionsArray.length; j++) {
+            let cellCount = 0;
+            let standardReps = standards * replicatesArray[i];
+            let sampleReps = sampleNum * replicatesArray[i];
+            let dilutions = sampleReps * dilutionsArray[j];
+            cellCount += standardReps + sampleReps + dilutions;
+            if (cellCount <= 96) {
+                combos.push({
+                    replicates: replicatesArray[i],
+                    dilutions: dilutionsArray[j],
+                    samples: sampleNum
+                });
+            }
+        }
+    }
+    return combos;
+}
 
-legend.selectAll('mylabels')
-    .data(keys)
-    .enter()
-    .append('text')
-        .attr('x', 120)
-        .attr('y', (d, i) => { return 100 + i * 25 })
-        .style('fill', 'black')
-        .text((d) => { return d })
+console.log(generatePlateCombos(2));
