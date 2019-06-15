@@ -61,7 +61,7 @@ const standardCurveData = (replicates) => {
 
 const createFinalData = (dilutionNum, sampleNum, replicates) => {
     let data = standardCurveData(replicates).concat(addDilution(dilutionNum, createSampleData(sampleNum, replicates)));
-    if (data.length !== 96) {
+    if (data.length < 96) {
         let remaining = 96 - data.length;
         for (let i = 0; i < remaining; i++) {
             data.push({
@@ -73,7 +73,7 @@ const createFinalData = (dilutionNum, sampleNum, replicates) => {
     return data;
 }
 
-// console.log(createFinalData(3, 12, 1));
+console.log(createFinalData(4, 10, 2));
 
 //http://www.cagrimmett.com/til/2016/08/17/d3-lets-make-a-grid.html
 const finalizeGridData = (array) => {
@@ -102,7 +102,7 @@ const finalizeGridData = (array) => {
 }
 
 const gridData = (rows, columns) => {
-    let finalData = createFinalData(3, 2, 6);
+    let finalData = createFinalData(4, 10, 2);
     let dataForGrid = [];
 
     for (let row = 0; row < rows; row++) {
@@ -130,7 +130,6 @@ const gridIt = (rows, columns, array) => {
 
 let finalFinalData = gridIt(8, 12, finalizedData);
 
-
 let grid = d3.select('#grid')
     .append('svg')
     .attr('width', "612px")
@@ -150,35 +149,7 @@ let column = row.selectAll('.square')
     .attr('width', (d) => { return d.width })
     .attr('height', (d) => { return d.height })
     .style('fill', (d) => { return d.color })
-    .style('stroke', '#fff');
-
-// let keys = [['Standard Curves ', 7], ['Samples ', 12], ['Replicates ', 3], ['Dilutions ', 2], 'Blanks']
-//
-// let values = [7, 12, 3, 2, 1];
-//
-// let legend = d3.select('#legend')
-//     .append('svg')
-//     .attr('width', 400)
-//     .attr('height', 500);
-//
-// legend.selectAll('mydots')
-//     .data(keys)
-//     .enter()
-//     .append('circle')
-//         .attr('cx', 100)
-//         .attr('cy', (d, i) => { return 100 + i * 25 })
-//         .attr('r', 3)
-//         .style('fill', 'black')
-//
-// legend.selectAll('mylabels')
-//     .data(keys)
-//     .enter()
-//     .append('text')
-//         .attr('x', 120)
-//         .attr('y', (d, i) => { return 100 + i * 25 })
-//         .style('fill', 'black')
-//         .text((d) => { return d })
-
+    .style('stroke', '#000');
 
 // Knowing a certain standard curve, given a number of samples, how many combos of replicates/dilutions without going over 96?
 
@@ -193,12 +164,13 @@ const generatePlateCombos = (sampleNum) => {
             let standardReps = standards * replicatesArray[i];
             let sampleReps = sampleNum * replicatesArray[i];
             let dilutions = sampleReps * dilutionsArray[j];
-            cellCount += standardReps + sampleReps + dilutions;
+            cellCount += standardReps + dilutions;
             if (cellCount <= 96) {
                 combos.push({
                     replicates: replicatesArray[i],
                     dilutions: dilutionsArray[j],
-                    samples: sampleNum
+                    samples: sampleNum,
+                    cellCount: cellCount
                 });
             }
         }
@@ -206,4 +178,4 @@ const generatePlateCombos = (sampleNum) => {
     return combos;
 }
 
-console.log(generatePlateCombos(2));
+console.log(generatePlateCombos(10));
