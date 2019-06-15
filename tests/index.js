@@ -102,7 +102,7 @@ const finalizeGridData = (array) => {
 }
 
 const gridData = (rows, columns) => {
-    let finalData = createFinalData(4, 10, 2);
+    let finalData = createFinalData(4, 2, 6);
     let dataForGrid = [];
 
     for (let row = 0; row < rows; row++) {
@@ -157,7 +157,7 @@ const generatePlateCombos = (sampleNum) => {
     const standards = 8;
     const combos = [];
     const replicatesArray = [2, 3, 4, 5, 6];
-    const dilutionsArray = [1, 2, 3, 4];
+    const dilutionsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     for (let i = 0; i < replicatesArray.length; i++) {
         for (let j = 0; j < dilutionsArray.length; j++) {
             let cellCount = 0;
@@ -178,4 +178,4 @@ const generatePlateCombos = (sampleNum) => {
     return combos;
 }
 
-console.log(generatePlateCombos(10));
+console.log(generatePlateCombos(12));
