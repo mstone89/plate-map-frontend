@@ -31,5 +31,4 @@ class CreatePlate extends Component {
     }
 }
 
-
 export default CreatePlate;
