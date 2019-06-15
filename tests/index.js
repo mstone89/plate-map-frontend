@@ -60,10 +60,20 @@ const standardCurveData = (replicates) => {
 }
 
 const createFinalData = (dilutionNum, sampleNum, replicates) => {
-    return standardCurveData(replicates).concat(
-        addDilution(dilutionNum, createSampleData(sampleNum, replicates))
-    );
+    let data = standardCurveData(replicates).concat(addDilution(dilutionNum, createSampleData(sampleNum, replicates)));
+    if (data.length !== 96) {
+        let remaining = 96 - data.length;
+        for (let i = 0; i < remaining; i++) {
+            data.push({
+                name: 'blank',
+                color: 'white'
+            });
+        }
+    }
+    return data;
 }
+
+// console.log(createFinalData(3, 12, 1));
 
 //http://www.cagrimmett.com/til/2016/08/17/d3-lets-make-a-grid.html
 const finalizeGridData = (array) => {
@@ -92,7 +102,7 @@ const finalizeGridData = (array) => {
 }
 
 const gridData = (rows, columns) => {
-    let finalData = createFinalData(2, 12, 3);
+    let finalData = createFinalData(3, 11, 2);
     let dataForGrid = [];
 
     for (let row = 0; row < rows; row++) {
@@ -142,29 +152,29 @@ let column = row.selectAll('.square')
     .style('fill', (d) => { return d.color })
     .style('stroke', '#fff');
 
-let keys = [['Standard Curves ', 7], ['Samples ', 12], ['Replicates ', 3], ['Dilutions ', 2], ['Blanks ', 1]]
-
-let values = [7, 12, 3, 2, 1];
-
-let legend = d3.select('#legend')
-    .append('svg')
-    .attr('width', 400)
-    .attr('height', 500);
-
-legend.selectAll('mydots')
-    .data(keys)
-    .enter()
-    .append('circle')
-        .attr('cx', 100)
-        .attr('cy', (d, i) => { return 100 + i * 25 })
-        .attr('r', 3)
-        .style('fill', 'black')
-
-legend.selectAll('mylabels')
-    .data(keys)
-    .enter()
-    .append('text')
-        .attr('x', 120)
-        .attr('y', (d, i) => { return 100 + i * 25 })
-        .style('fill', 'black')
-        .text((d) => { return d })
+// let keys = [['Standard Curves ', 7], ['Samples ', 12], ['Replicates ', 3], ['Dilutions ', 2], 'Blanks']
+//
+// let values = [7, 12, 3, 2, 1];
+//
+// let legend = d3.select('#legend')
+//     .append('svg')
+//     .attr('width', 400)
+//     .attr('height', 500);
+//
+// legend.selectAll('mydots')
+//     .data(keys)
+//     .enter()
+//     .append('circle')
+//         .attr('cx', 100)
+//         .attr('cy', (d, i) => { return 100 + i * 25 })
+//         .attr('r', 3)
+//         .style('fill', 'black')
+//
+// legend.selectAll('mylabels')
+//     .data(keys)
+//     .enter()
+//     .append('text')
+//         .attr('x', 120)
+//         .attr('y', (d, i) => { return 100 + i * 25 })
+//         .style('fill', 'black')
+//         .text((d) => { return d })
