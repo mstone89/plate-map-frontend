@@ -185,7 +185,7 @@ class Plate extends Component {
             .enter().append('g')
             .attr('class', 'row');
 
-        let column = row.selectAll('.square')
+        row.selectAll('.square')
             .data((d) => { return d })
             .enter().append('rect')
             .attr('class', 'square')
