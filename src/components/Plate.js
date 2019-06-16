@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as d3 from "d3";
 
 class Plate extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class Plate extends Component {
     }
 
     componentDidMount = () => {
-        this.fetchPlate()
+        this.fetchPlate();
     }
 
     fetchPlate = () => {
@@ -24,6 +25,10 @@ class Plate extends Component {
                     plate: jsonData
                 });
                 this.generatePlateData(this.state.plate.dilutions, this.state.plate.samples, this.state.plate.replicates);
+                this.generateGrid();
+                console.log(this.state.gridData);
+                this.renderGrid(this.state.gridData);
+
             })
             .catch(err => console.log('view plate error: ', err));
     }
@@ -109,10 +114,91 @@ class Plate extends Component {
         createFinalData(plateDilution, plateSample, plateReplicates);
     }
 
+    generateGrid = () => {
+        const finalizeGridData = (array) => {
+            let finalArray = [];
+            let x = 1;
+            let y = 1;
+            let width = 50;
+            let height = 50;
+
+            for (let i = 0; i < array.length; i++) {
+                for (let j = 0; j < array[i].length; j++) {
+                    finalArray.push({
+                        name: array[i][j].name,
+                        color: array[i][j].color,
+                        x: x,
+                        y: y,
+                        width: width,
+                        height: height
+                    });
+                    x += width;
+                }
+                x = 1;
+                y += height;
+            }
+            return finalArray;
+        }
+
+        const gridData = (rows, columns) => {
+            let finalData = this.state.plateData;
+            let dataForGrid = [];
+
+            for (let row = 0; row < rows; row++) {
+                dataForGrid.push([]);
+                for (let column = 0; column < columns; column++) {
+                    dataForGrid[row].push(finalData.shift());
+                }
+            }
+
+            return dataForGrid;
+        }
+
+        let finalizedData = finalizeGridData(gridData(8, 12));
+
+        const gridIt = (rows, columns, array) => {
+            let dataForGrid = [];
+            for (let row = 0; row < rows; row++) {
+                dataForGrid.push([]);
+                for (let column = 0; column < columns; column++) {
+                    dataForGrid[row].push(array.shift());
+                }
+            }
+            this.setState({
+                gridData: dataForGrid
+            })
+        }
+
+        gridIt(8, 12, finalizedData);
+    }
+
+    renderGrid = (data) => {
+        let grid = d3.select('#grid')
+            .append('svg')
+            .attr('width', "612px")
+            .attr('height', "408px")
+
+        let row = grid.selectAll('.row')
+            .data(data)
+            .enter().append('g')
+            .attr('class', 'row');
+
+        let column = row.selectAll('.square')
+            .data((d) => { return d })
+            .enter().append('rect')
+            .attr('class', 'square')
+            .attr('x', (d) => { return d.x })
+            .attr('y', (d) => { return d.y })
+            .attr('width', (d) => { return d.width })
+            .attr('height', (d) => { return d.height })
+            .style('fill', (d) => { return d.color })
+            .style('stroke', '#000');
+    }
+
     render() {
         return (
             <div id="grid"></div>
-        )
+        );
     }
 }
 
