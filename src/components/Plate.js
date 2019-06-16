@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import * as d3 from "d3";
 
 class Plate extends Component {
@@ -7,7 +9,8 @@ class Plate extends Component {
         this.state = {
             plate: [],
             plateData: [],
-            gridData: []
+            gridData: [],
+            redirect: false
         }
     }
 
@@ -26,9 +29,8 @@ class Plate extends Component {
                 });
                 this.generatePlateData(this.state.plate.dilutions, this.state.plate.samples, this.state.plate.replicates);
                 this.generateGrid();
-                console.log(this.state.gridData);
                 this.renderGrid(this.state.gridData);
-
+                console.log(this.state);
             })
             .catch(err => console.log('view plate error: ', err));
     }
@@ -195,9 +197,28 @@ class Plate extends Component {
             .style('stroke', '#000');
     }
 
+    handleDelete = (id) => {
+        fetch(`http://localhost:3000/plates/${this.state.plate.id}`, {
+            method: 'DELETE'
+        }).then(data => {
+            console.log('deleted data');
+        }).catch(err => console.log('delete plate error: ', err));
+        this.setState({
+            redirect: true
+        });
+    }
+
     render() {
+
+        if (this.state.redirect) {
+            return <Redirect to="/" />
+        }
+
         return (
-            <div id="grid"></div>
+            <div>
+                <div id="grid"></div>
+                <Button onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
+            </div>
         );
     }
 }

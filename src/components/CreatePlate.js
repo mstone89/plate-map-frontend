@@ -53,6 +53,7 @@ class CreatePlate extends Component {
                             required="please indicate number of samples"
                             type="number"
                             min="1"
+                            max="16"
                             value={this.state.sampleInput}
                             onChange={this.handleChange}
                         />

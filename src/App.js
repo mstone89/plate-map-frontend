@@ -21,7 +21,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={CreatePlate} />
                         <Route path="/plates" component={SavedPlates} />
-                        <Route path="/view/:id" component={Plate} />
+                        <Route path="/view/:id" render={(props) => <Plate {...props} handleDelete={this.handleDelete}/>} />
                         <Route path="/combos/:sampleInput" component={ViewCombos} />
                     </Switch>
                 </Router>
