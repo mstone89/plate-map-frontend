@@ -4,14 +4,10 @@ import { Button } from 'react-bootstrap';
 
 import CreatePlate from './components/CreatePlate';
 import Plate from './components/Plate';
-import Plates from './components/Plates';
+import ViewCombos from './components/ViewCombos';
 import SavedPlates from './components/SavedPlates';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>
@@ -23,8 +19,9 @@ class App extends Component {
                     </nav>
                     <Switch>
                         <Route exact path="/" component={CreatePlate} />
-                        <Route path ="/plates" component={SavedPlates} />
-                        <Route path ="/view/:id" component={Plate} />
+                        <Route path="/plates" component={SavedPlates} />
+                        <Route path="/view/:id" component={Plate} />
+                        <Route path="/combos/:sampleInput" component={ViewCombos} />
                     </Switch>
                 </Router>
             </div>
