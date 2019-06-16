@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import * as d3 from "d3";
 
+// this.generatePlateData(this.state.dilutions, this.state.samples, this.state.replicates);
+
 class ViewGeneratedPlate extends Component {
     constructor(props) {
         super(props);
@@ -14,10 +16,6 @@ class ViewGeneratedPlate extends Component {
         }
     }
 
-    componentWillMount = () => {
-        this.addPlateData();
-    }
-
     addPlateData = () => {
         const path = this.props.location.pathname;
         const plateData = path.split('/');
@@ -28,9 +26,7 @@ class ViewGeneratedPlate extends Component {
             samples: this.state.samples + samples,
             replicates: this.state.replicates + replicates,
             dilutions: this.state.dilutions + dilutions
-        })
-        this.generatePlateData(this.state.dilutions, this.state.samples, this.state.replicates);
-        console.log(this.state);
+        });
     }
 
     generatePlateData = (plateDilution, plateSample, plateReplicates) => {
@@ -197,7 +193,10 @@ class ViewGeneratedPlate extends Component {
 
     render() {
         return (
-            <div>some plate</div>
+            <div>
+                <div id="grid"></div>
+                <Button>Save Plate</Button>
+            </div>
         );
     }
 }
