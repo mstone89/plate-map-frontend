@@ -8,25 +8,19 @@ class ViewGeneratedPlate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            samples: 0,
-            replicates: 0,
-            dilutions: 0,
             plateData: [],
             gridData: []
         }
     }
 
-    addPlateData = () => {
+    componentDidMount = () => {
         const path = this.props.location.pathname;
         const plateData = path.split('/');
         const samples = parseInt(plateData[2]);
         const replicates = parseInt(plateData[3]);
         const dilutions = parseInt(plateData[4]);
-        this.setState({
-            samples: this.state.samples + samples,
-            replicates: this.state.replicates + replicates,
-            dilutions: this.state.dilutions + dilutions
-        });
+        this.generatePlateData(dilutions, samples, replicates);
+        console.log(this.state);
     }
 
     generatePlateData = (plateDilution, plateSample, plateReplicates) => {
@@ -102,15 +96,14 @@ class ViewGeneratedPlate extends Component {
                     });
                 }
             }
-            this.setState({
-                plateData: data
-            })
+            return this.generateGrid(data);
         }
 
         createFinalData(plateDilution, plateSample, plateReplicates);
+
     }
 
-    generateGrid = () => {
+    generateGrid = (data) => {
         const finalizeGridData = (array) => {
             let finalArray = [];
             let x = 1;
@@ -137,7 +130,7 @@ class ViewGeneratedPlate extends Component {
         }
 
         const gridData = (rows, columns) => {
-            let finalData = this.state.plateData;
+            let finalData = data;
             let dataForGrid = [];
 
             for (let row = 0; row < rows; row++) {
@@ -160,8 +153,11 @@ class ViewGeneratedPlate extends Component {
                     dataForGrid[row].push(array.shift());
                 }
             }
+            console.log(dataForGrid);
             this.setState({
                 gridData: dataForGrid
+            }, () => {
+                console.log(this.state);
             })
         }
 
@@ -194,6 +190,7 @@ class ViewGeneratedPlate extends Component {
     render() {
         return (
             <div>
+                {this.state.gridData.length > 0 ? this.renderGrid(this.state.gridData) : '' }
                 <div id="grid"></div>
                 <Button>Save Plate</Button>
             </div>
