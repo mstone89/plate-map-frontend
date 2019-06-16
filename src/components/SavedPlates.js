@@ -14,10 +14,10 @@ class SavedPlates extends Component {
         fetch('http://localhost:3000/plates')
             .then(data => data.json())
             .then(jsonData => {
-                console.log(jsonData);
                 this.setState({
                     savedPlates: jsonData
                 });
+                console.log(this.state.savedPlates);
             })
             .catch(err => console.log('view plates error: ', err));
     }
@@ -27,6 +27,7 @@ class SavedPlates extends Component {
     }
 
     render() {
+        console.log(this.state);
         return (
             <div className="saved-plates">
                 <h3>Saved Plates</h3>

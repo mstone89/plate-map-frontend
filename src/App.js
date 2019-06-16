@@ -6,6 +6,7 @@ import CreatePlate from './components/CreatePlate';
 import Plate from './components/Plate';
 import ViewCombos from './components/ViewCombos';
 import SavedPlates from './components/SavedPlates';
+import ViewGeneratedPlate from './components/ViewGeneratedPlate';
 
 class App extends Component {
     render() {
@@ -22,6 +23,7 @@ class App extends Component {
                         <Route path="/plates" component={SavedPlates} />
                         <Route path="/view/:id" component={Plate} />
                         <Route path="/combos/:sampleInput" component={ViewCombos} />
+                        <Route path="/view-generated-plate" component={ViewGeneratedPlate} />
                     </Switch>
                 </Router>
             </div>
