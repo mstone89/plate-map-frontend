@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import * as d3 from "d3";
 
+const API_URI = process.env.REACT_APP_BACKEND_URI;
+
 class Plate extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +23,7 @@ class Plate extends Component {
     fetchPlate = () => {
         const path = this.props.location.pathname;
         const id = path.split('/')[2];
-        fetch(`http://localhost:3000/plates/${id}`)
+        fetch(`${API_URI}/plates/${id}`)
             .then(data => data.json())
             .then(jsonData => {
                 this.setState({
@@ -230,7 +232,7 @@ class Plate extends Component {
     }
 
     handleDelete = (id) => {
-        fetch(`http://localhost:3000/plates/${this.state.plate.id}`, {
+        fetch(`${API_URI}/plates/${this.state.plate.id}`, {
             method: 'DELETE'
         }).then(data => {
             console.log('deleted data');

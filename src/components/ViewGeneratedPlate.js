@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import * as d3 from "d3";
 
-// this.generatePlateData(this.state.dilutions, this.state.samples, this.state.replicates);
+const API_URI = process.env.REACT_APP_BACKEND_URI;
 
 class ViewGeneratedPlate extends Component {
     constructor(props) {
@@ -50,7 +50,7 @@ class ViewGeneratedPlate extends Component {
     }
 
     handleSavePlate = (plate) => {
-        fetch('http://localhost:3000/plates', {
+        fetch(`${API_URI}/plates`, {
             body: JSON.stringify(plate),
             method: 'POST',
             headers: {

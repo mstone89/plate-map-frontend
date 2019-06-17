@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Media } from 'react-bootstrap';
 
+const API_URI = process.env.REACT_APP_BACKEND_URI;
+
 class SavedPlates extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +13,7 @@ class SavedPlates extends Component {
     }
 
     fetchSavedPlates = () => {
-        fetch('http://localhost:3000/plates')
+        fetch(`${API_URI}/plates`)
             .then(data => data.json())
             .then(jsonData => {
                 this.setState({
