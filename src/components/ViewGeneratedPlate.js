@@ -8,8 +8,9 @@ class ViewGeneratedPlate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            plateData: [],
-            gridData: [],
+            samples: 0,
+            replicates: 0,
+            dilutions: 0,
             nameInput: ''
         }
     }
@@ -20,11 +21,17 @@ class ViewGeneratedPlate extends Component {
         const samples = parseInt(plateData[2]);
         const replicates = parseInt(plateData[3]);
         const dilutions = parseInt(plateData[4]);
+        this.setState({
+            samples: this.state.samples + samples,
+            replicates: this.state.replicates + replicates,
+            dilutions: this.state.dilutions + dilutions
+        })
         this.generatePlateData(dilutions, samples, replicates);
         console.log(this.state);
     }
 
     handleChange = (e) => {
+        e.preventDefault();
         this.setState({
             nameInput: e.target.value
         });
@@ -32,21 +39,13 @@ class ViewGeneratedPlate extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const path = this.props.location.pathname;
-        const plateData = path.split('/');
-        const samples = parseInt(plateData[2]);
-        const replicates = parseInt(plateData[3]);
-        const dilutions = parseInt(plateData[4]);
         let plate = {
-            name: this.state.name,
-            samples: samples,
-            replicates: replicates,
-            dilutions: dilutions
+            name: this.state.nameInput,
+            samples: this.state.samples,
+            replicates: this.state.replicates,
+            dilutions: this.state.dilutions
         }
         this.handleSavePlate(plate);
-        this.setState({
-            nameInput: ''
-        });
     }
 
     handleSavePlate = (plate) => {
@@ -60,7 +59,9 @@ class ViewGeneratedPlate extends Component {
         })
         .then(createdPlate => createdPlate.json())
         .then(data => {
-            console.log(data);
+            this.setState({
+                nameInput: ''
+            })
         })
         .catch(err => console.log('create plate error: ', err));
     }
@@ -118,7 +119,6 @@ class ViewGeneratedPlate extends Component {
                     }
                 }
             }
-            // https://stackoverflow.com/questions/6712034/sort-array-by-firstname-alphabetically-in-javascript
             return standards.sort((a, b) => {
                 if (a.name < b.name) { return 1 }
                 if (a.name > b.name) { return - 1 }
@@ -204,12 +204,7 @@ class ViewGeneratedPlate extends Component {
                     dataForGrid[row].push(array.shift());
                 }
             }
-            console.log(dataForGrid);
-            this.setState({
-                gridData: dataForGrid
-            }, () => {
-                console.log(this.state);
-            })
+            this.renderGrid(dataForGrid)
         }
 
         gridIt(8, 12, finalizedData);
@@ -264,7 +259,6 @@ class ViewGeneratedPlate extends Component {
     render() {
         return (
             <div>
-                {this.state.gridData.length > 0 ? this.renderGrid(this.state.gridData) : '' }
                 <div id="grid"></div>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group>
