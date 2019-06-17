@@ -184,14 +184,30 @@ class Plate extends Component {
     }
 
     renderGrid = (data) => {
+        let svgWidth = 800;
+        let svgHeight = 500;
+
+        let labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
+        labels = labels.reverse();
+
+        let yScale = d3.scaleLinear()
+            .domain([0, 7])
+            .range([svgHeight - 120, 20]);
+
+        let yAxis =  d3.axisLeft()
+            .scale(yScale)
+            .tickFormat((d) => { return labels[d] });
+
         let grid = d3.select('#grid')
             .append('svg')
-            .attr('width', "612px")
-            .attr('height', "408px")
+            .attr('width', svgWidth)
+            .attr('height', svgHeight)
 
         let row = grid.selectAll('.row')
             .data(data)
             .enter().append('g')
+            .attr('transform', 'translate(98,50)')
             .attr('class', 'row');
 
         row.selectAll('.circle')
@@ -207,6 +223,10 @@ class Plate extends Component {
                     return '#aaa';
                 }
             });
+
+        grid.append('g')
+            .attr('transform', 'translate(70, 50)')
+            .call(yAxis)
     }
 
     handleDelete = (id) => {
