@@ -185,16 +185,19 @@ class Plate extends Component {
             .enter().append('g')
             .attr('class', 'row');
 
-        row.selectAll('.square')
+        row.selectAll('.circle')
             .data((d) => { return d })
-            .enter().append('rect')
-            .attr('class', 'square')
-            .attr('x', (d) => { return d.x })
-            .attr('y', (d) => { return d.y })
-            .attr('width', (d) => { return d.width })
-            .attr('height', (d) => { return d.height })
+            .enter().append('circle')
+            .attr('class', 'circle')
+            .attr('cx', (d) => { return d.x + 25 })
+            .attr('cy', (d) => { return d.y + 25 })
+            .attr('r', 25)
             .style('fill', (d) => { return d.color })
-            .style('stroke', '#000');
+            .style('stroke', (d) => {
+                if (d.color === 'white') {
+                    return '#aaa';
+                }
+            });
     }
 
     handleDelete = (id) => {
