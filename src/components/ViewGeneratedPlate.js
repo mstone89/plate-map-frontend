@@ -96,6 +96,15 @@ class ViewGeneratedPlate extends Component {
                     });
                 }
             }
+            data = data.sort((a, b) => {
+                if (a.color < b.color) {
+                    return 1;
+                }
+                if (a.color > b.color) {
+                    return - 1;
+                }
+                return 0;
+            });
             return this.generateGrid(data);
         }
 

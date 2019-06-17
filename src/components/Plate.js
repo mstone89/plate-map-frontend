@@ -108,9 +108,18 @@ class Plate extends Component {
                     });
                 }
             }
+            data = data.sort((a, b) => {
+                if (a.color < b.color) {
+                    return 1;
+                }
+                if (a.color > b.color) {
+                    return - 1;
+                }
+                return 0;
+            });
             this.setState({
                 plateData: data
-            })
+            });
         }
 
         createFinalData(plateDilution, plateSample, plateReplicates);
