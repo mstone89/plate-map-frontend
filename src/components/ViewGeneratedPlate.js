@@ -270,6 +270,7 @@ class ViewGeneratedPlate extends Component {
                     <Form.Group>
                         <Form.Label>Save Plate</Form.Label>
                         <Form.Control
+                            required
                             type="text"
                             placeholder="enter plate name here"
                             value={this.state.nameInput}
