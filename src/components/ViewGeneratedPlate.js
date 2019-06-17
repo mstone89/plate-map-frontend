@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import * as d3 from "d3";
 
 // this.generatePlateData(this.state.dilutions, this.state.samples, this.state.replicates);
@@ -9,7 +9,8 @@ class ViewGeneratedPlate extends Component {
         super(props);
         this.state = {
             plateData: [],
-            gridData: []
+            gridData: [],
+            nameInput: ''
         }
     }
 
@@ -21,6 +22,47 @@ class ViewGeneratedPlate extends Component {
         const dilutions = parseInt(plateData[4]);
         this.generatePlateData(dilutions, samples, replicates);
         console.log(this.state);
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            nameInput: e.target.value
+        });
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const path = this.props.location.pathname;
+        const plateData = path.split('/');
+        const samples = parseInt(plateData[2]);
+        const replicates = parseInt(plateData[3]);
+        const dilutions = parseInt(plateData[4]);
+        let plate = {
+            name: this.state.name,
+            samples: samples,
+            replicates: replicates,
+            dilutions: dilutions
+        }
+        this.handleSavePlate(plate);
+        this.setState({
+            nameInput: ''
+        });
+    }
+
+    handleSavePlate = (plate) => {
+        fetch('http://localhost:3000/plates', {
+            body: JSON.stringify(plate),
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(createdPlate => createdPlate.json())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(err => console.log('create plate error: ', err));
     }
 
     generatePlateData = (plateDilution, plateSample, plateReplicates) => {
@@ -177,7 +219,7 @@ class ViewGeneratedPlate extends Component {
         let svgWidth = 800;
         let svgHeight = 500;
 
-        const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        let labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
         labels = labels.reverse();
 
@@ -224,7 +266,18 @@ class ViewGeneratedPlate extends Component {
             <div>
                 {this.state.gridData.length > 0 ? this.renderGrid(this.state.gridData) : '' }
                 <div id="grid"></div>
-                <Button>Save Plate</Button>
+                <Form onSubmit={this.handleSubmit}>
+                    <Form.Group>
+                        <Form.Label>Save Plate</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="enter plate name here"
+                            value={this.state.nameInput}
+                            onChange={this.handleChange}
+                        />
+                        <Button type="submit" variant="outline-secondary">Save Plate</Button>
+                    </Form.Group>
+                </Form>
             </div>
         );
     }
