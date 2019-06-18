@@ -92,11 +92,24 @@ class ViewGeneratedPlate extends Component {
         // Add dilution to sample data
         const addDilution = (dilutionNum, sampleData) => {
             let dilutionData = [];
+            let opacity = dilutionNum;
             for (let i = 0; i < dilutionNum; i++) {
                 for (let j = 0; j < sampleData.length; j++) {
-                    dilutionData.push(sampleData[j]);
+                    let dilution = (1 / dilutionNum) * opacity;
+                    let newData = {
+                        name: sampleData[j].name,
+                        color: sampleData[j].color,
+                        dilution: dilution
+                    }
+                    dilutionData.push(newData);
                 }
+                opacity--;
             }
+            dilutionData = dilutionData.sort((a, b) => {
+                if (a.dilution < b.dilution) { return 1 }
+                if (a.dilution > b.dilution) { return - 1 }
+                return 0;
+            });
             return dilutionData;
         }
 
@@ -170,7 +183,8 @@ class ViewGeneratedPlate extends Component {
                         x: x,
                         y: y,
                         width: width,
-                        height: height
+                        height: height,
+                        dilution: array[i][j].dilution
                     });
                     x += width;
                 }
@@ -248,6 +262,11 @@ class ViewGeneratedPlate extends Component {
             .style('stroke', (d) => {
                 if (d.color === 'white') {
                     return '#aaa';
+                }
+            })
+            .style('opacity', (d) => {
+                if (d.dilution !== undefined) {
+                    return d.dilution;
                 }
             });
 
