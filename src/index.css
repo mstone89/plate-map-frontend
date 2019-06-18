@@ -61,3 +61,13 @@ aside > h2 {
 img {
     margin: 30px 10px 0 10px;
 }
+
+.delete-btn {
+    display: block;
+    margin: 0 auto;
+}
+
+svg {
+    display: block;
+    margin: 75px auto 0 auto;
+}

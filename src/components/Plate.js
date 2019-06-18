@@ -268,9 +268,9 @@ class Plate extends Component {
         }
 
         return (
-            <div>
+            <div className="grid-container">
                 <div id="grid"></div>
-                <Button onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
+                <Button className="delete-btn" onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
             </div>
         );
     }
