@@ -24,6 +24,39 @@ nav {
 .main-container {
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
-    width: 50%;
+    flex-wrap: wrap;
+    margin: 100px auto;
+    width: 60%;
+    justify-content: center;
+}
+
+aside {
+    max-width: 600px;
+    margin: 0 30px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+aside > h2 {
+    padding-bottom: 20px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    margin: 0 30px;
+}
+
+.right-column > img {
+    max-width: 350px;
+}
+
+.create-btn {
+    display: block;
+    margin: 30px auto 0 auto;
+}
+
+img {
+    margin: 30px 10px 0 10px;
 }
