@@ -1,3 +1,29 @@
+/* * {
+    border: 1px solid gold;
+} */
+
 body {
   margin: 0;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 30px 0;
+}
+
+.logo, .nav-buttons {
+    margin: auto 0;
+}
+
+.nav-button {
+    margin-right: 20px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 50%;
 }

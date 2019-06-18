@@ -11,12 +11,14 @@ import ViewGeneratedPlate from './components/ViewGeneratedPlate';
 class App extends Component {
     render() {
         return (
-            <div>
+            <div className="wrapper">
                 <Router>
                     <nav>
-                        <h1><Link to="/">Plate-Map</Link></h1>
-                        <Link to="/"><Button>Create</Button></Link>
-                        <Link to="/plates"><Button>Saved Plates</Button></Link>
+                        <h1 className="logo"><Link to="/">Plate-Map</Link></h1>
+                        <div className="nav-buttons">
+                            <Link to="/"><Button className="nav-button">Create</Button></Link>
+                            <Link to="/plates"><Button className="nav-button">Saved Plates</Button></Link>
+                        </div>
                     </nav>
                     <Switch>
                         <Route exact path="/" component={CreatePlate} />
