@@ -232,7 +232,7 @@ class Plate extends Component {
             .attr('class', 'circle')
             .attr('cx', (d) => { return d.x + 25 })
             .attr('cy', (d) => { return d.y + 25 })
-            .attr('r', 25)
+            .attr('r', 20)
             .style('fill', (d) => { return d.color })
             .style('stroke', (d) => {
                 if (d.color === 'white') {
