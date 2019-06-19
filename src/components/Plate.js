@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Card, ListGroup } from 'react-bootstrap';
 import * as d3 from "d3";
 
 const API_URI = process.env.REACT_APP_BACKEND_URI;
@@ -29,6 +29,7 @@ class Plate extends Component {
                 this.setState({
                     plate: jsonData
                 });
+                console.log(jsonData);
                 this.generatePlateData(this.state.plate.dilutions, this.state.plate.samples, this.state.plate.replicates, this.state.plate.sc_reps);
                 this.generateGrid();
                 this.renderGrid(this.state.gridData);
@@ -261,15 +262,26 @@ class Plate extends Component {
     }
 
     render() {
-
+        console.log(this.state.plateData);
         if (this.state.redirect) {
             return <Redirect to="/" />
         }
 
         return (
             <div className="grid-container">
+                <Card>
+                    <Card.Body>
+                        <Card.Header as="h5">{this.state.plate.name}</Card.Header>
+                        <ListGroup>
+                            <ListGroup.Item>Samples: {this.state.plate.samples}</ListGroup.Item>
+                            <ListGroup.Item>Standard Curve Reps: {this.state.plate.sc_reps}</ListGroup.Item>
+                            <ListGroup.Item>Replicates: {this.state.plate.replicates}</ListGroup.Item>
+                            <ListGroup.Item>Dilutions: {this.state.plate.dilutions}</ListGroup.Item>
+                        </ListGroup>
+                        <Button className="delete-btn" onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
+                    </Card.Body>
+                </Card>
                 <div id="grid"></div>
-                <Button className="delete-btn" onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
             </div>
         );
     }
