@@ -19,7 +19,7 @@ class SavedPlates extends Component {
                 this.setState({
                     savedPlates: jsonData
                 });
-                // console.log(this.state.savedPlates);
+                console.log(this.state.savedPlates);
             })
             .catch(err => console.log('view plates error: ', err));
     }
@@ -41,6 +41,7 @@ class SavedPlates extends Component {
                                 <Link to={link}><h5>{plate.name}</h5></Link>
                                 <p>
                                     Samples: {plate.samples} /
+                                    Standard Curve Reps: {plate.sc_reps} /
                                     Replicates: {plate.replicates} /
                                     Dilutions: {plate.dilutions}
                                 </p>
