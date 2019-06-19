@@ -29,15 +29,14 @@ class Plate extends Component {
                 this.setState({
                     plate: jsonData
                 });
-                this.generatePlateData(this.state.plate.dilutions, this.state.plate.samples, this.state.plate.replicates);
+                this.generatePlateData(this.state.plate.dilutions, this.state.plate.samples, this.state.plate.replicates, this.state.plate.sc_reps);
                 this.generateGrid();
                 this.renderGrid(this.state.gridData);
-                console.log(this.state);
             })
             .catch(err => console.log('view plate error: ', err));
     }
 
-    generatePlateData = (plateDilution, plateSample, plateReplicates) => {
+    generatePlateData = (plateDilution, plateSample, plateReplicates, scReps) => {
         let colors = [
             'tomato', 'orange', 'violet', 'cornflowerblue',
             'slateblue', 'mediumseagreen', 'aqua', 'chartreuse',
@@ -85,10 +84,10 @@ class Plate extends Component {
         }
 
         // Create standard curve data
-        const standardCurveData = (replicates) => {
+        const standardCurveData = (scReps) => {
             let standards = [];
 
-            for (let i = 0; i < replicates; i++) {
+            for (let i = 0; i < scReps; i++) {
                 for (let j = 0; j < 8; j++) {
                     if (j === 7) {
                         standards.push({
@@ -112,8 +111,8 @@ class Plate extends Component {
         }
 
         // Take all created data and combine it
-        const createFinalData = (dilutionNum, sampleNum, replicates) => {
-            let data = standardCurveData(replicates).concat(addDilution(dilutionNum, createSampleData(sampleNum, replicates)));
+        const createFinalData = (dilutionNum, sampleNum, replicates, scReps) => {
+            let data = standardCurveData(scReps).concat(addDilution(dilutionNum, createSampleData(sampleNum, replicates)));
             if (data.length < 96) {
                 let remaining = 96 - data.length;
                 for (let i = 0; i < remaining; i++) {
@@ -137,7 +136,7 @@ class Plate extends Component {
             });
         }
 
-        createFinalData(plateDilution, plateSample, plateReplicates);
+        createFinalData(plateDilution, plateSample, plateReplicates, scReps);
     }
 
     generateGrid = () => {
