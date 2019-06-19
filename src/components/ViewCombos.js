@@ -57,7 +57,7 @@ class ViewCombos extends Component {
                     Plate Combinations for {this.state.sampleNum} Samples
                 </div>
                 {this.state.combos.map((combo, index) => {
-                    const link = `/view-generated-plate/${combo.samples}/${combo.replicates}/${combo.dilutions}`;
+                    const link = `/view-generated-plate/${combo.samples}/${combo.scReps}/${combo.replicates}/${combo.dilutions}`;
                     return (
                         <Media key={index}>
                             <Media.Body>
