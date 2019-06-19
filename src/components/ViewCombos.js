@@ -12,24 +12,28 @@ class ViewCombos extends Component {
     }
 
     generatePlateCombos = (sampleNum) => {
-        const combos = [];
         const standards = 8;
+        const combos = [];
+        const standardRepsArray = [2, 3];
         const replicatesArray = [2, 3, 4, 5, 6];
         const dilutionsArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        for (let i = 0; i < replicatesArray.length; i++) {
-            for (let j = 0; j < dilutionsArray.length; j++) {
-                let cellCount = 0;
-                let standardReps = standards * replicatesArray[i];
-                let sampleReps = sampleNum * replicatesArray[i];
-                let dilutions = sampleReps * dilutionsArray[j];
-                cellCount += standardReps + dilutions;
-                if (cellCount <= 96) {
-                    combos.push({
-                        replicates: replicatesArray[i],
-                        dilutions: dilutionsArray[j],
-                        samples: sampleNum,
-                        cellCount: cellCount
-                    });
+        for (let h = 0; h < standardRepsArray.length; h++) {
+            for (let i = 0; i < replicatesArray.length; i++) {
+                for (let j = 0; j < dilutionsArray.length; j++) {
+                    let cellCount = 0;
+                    let standardReps = standards * standardRepsArray[h];
+                    let sampleReps = sampleNum * replicatesArray[i];
+                    let dilutions = sampleReps * dilutionsArray[j];
+                    cellCount += standardReps + dilutions;
+                    if (cellCount <= 96) {
+                        combos.push({
+                            scReps: standardRepsArray[h],
+                            replicates: replicatesArray[i],
+                            dilutions: dilutionsArray[j],
+                            samples: sampleNum,
+                            cellCount: cellCount
+                        });
+                    }
                 }
             }
         }
@@ -60,7 +64,8 @@ class ViewCombos extends Component {
                                 <Link to={link}><h5>Plate Combination {index + 1}</h5></Link>
                                 <p>
                                     Samples: {combo.samples} /
-                                    Replicates: {combo.replicates} /
+                                    Standard Curve Reps: {combo.scReps} /
+                                    Sample Reps: {combo.replicates} /
                                     Dilutions: {combo.dilutions} /
                                     Cell Count: {combo.cellCount}
                                 </p>
