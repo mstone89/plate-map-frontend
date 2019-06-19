@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Media } from 'react-bootstrap';
+import { Media, Button } from 'react-bootstrap';
 
 const API_URI = process.env.REACT_APP_BACKEND_URI;
 
@@ -28,11 +28,40 @@ class SavedPlates extends Component {
         this.fetchSavedPlates();
     }
 
+    sortByCellCount = (array) => {
+        this.setState({
+            combos: array.sort((a, b) => { return b.cellCount - a.cellCount })
+        });
+    }
+
+    sortByDilutions = (array) => {
+        this.setState({
+            combos: array.sort((a, b) => { return b.dilutions - a.dilutions })
+        });
+    }
+
+    sortBySampleReps = (array) => {
+        this.setState({
+            combos: array.sort((a, b) => { return b.replicates - a.replicates })
+        });
+    }
+
+    sortByStandardCurveReps = (array) => {
+        this.setState({
+            combos: array.sort((a, b) => { return b.scReps - a.scReps })
+        });
+    }
+
     render() {
         console.log(this.state);
         return (
             <div className="saved-plates">
                 <h3>Saved Plates</h3>
+                Sort by:
+                <Button onClick={() => {this.sortByCellCount(this.state.savedPlates)}}>Cell Count</Button>
+                <Button onClick={() => {this.sortByDilutions(this.state.savedPlates)}}>Dilutions</Button>
+                <Button onClick={() => {this.sortBySampleReps(this.state.savedPlates)}}>Sample Reps</Button>
+                <Button onClick={() => {this.sortByStandardCurveReps(this.state.savedPlates)}}>SC Reps</Button>
                 {this.state.savedPlates.map((plate, index) => {
                     const link = `/view/${plate.id}`;
                     return (
