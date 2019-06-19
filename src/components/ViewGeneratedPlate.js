@@ -9,6 +9,7 @@ class ViewGeneratedPlate extends Component {
         super(props);
         this.state = {
             samples: 0,
+            scReps: 0,
             replicates: 0,
             dilutions: 0,
             nameInput: ''
@@ -19,14 +20,16 @@ class ViewGeneratedPlate extends Component {
         const path = this.props.location.pathname;
         const plateData = path.split('/');
         const samples = parseInt(plateData[2]);
-        const replicates = parseInt(plateData[3]);
-        const dilutions = parseInt(plateData[4]);
+        const scReps = parseInt(plateData[3]);
+        const replicates = parseInt(plateData[4]);
+        const dilutions = parseInt(plateData[5]);
         this.setState({
             samples: this.state.samples + samples,
+            scReps: this.state.scReps + scReps,
             replicates: this.state.replicates + replicates,
             dilutions: this.state.dilutions + dilutions
         })
-        this.generatePlateData(dilutions, samples, replicates);
+        this.generatePlateData(dilutions, samples, replicates, scReps);
         console.log(this.state);
     }
 
@@ -66,7 +69,7 @@ class ViewGeneratedPlate extends Component {
         .catch(err => console.log('create plate error: ', err));
     }
 
-    generatePlateData = (plateDilution, plateSample, plateReplicates) => {
+    generatePlateData = (plateDilution, plateSample, plateReplicates, scReps) => {
         let colors = [
             'tomato', 'orange', 'violet', 'cornflowerblue',
             'slateblue', 'mediumseagreen', 'aqua', 'chartreuse',
@@ -114,10 +117,10 @@ class ViewGeneratedPlate extends Component {
         }
 
         // Create standard curve data
-        const standardCurveData = (replicates) => {
+        const standardCurveData = (scReps) => {
             let standards = [];
 
-            for (let i = 0; i < replicates; i++) {
+            for (let i = 0; i < scReps; i++) {
                 for (let j = 0; j < 8; j++) {
                     if (j === 7) {
                         standards.push({
@@ -140,8 +143,8 @@ class ViewGeneratedPlate extends Component {
         }
 
         // Take all created data and combine it
-        const createFinalData = (dilutionNum, sampleNum, replicates) => {
-            let data = standardCurveData(replicates).concat(addDilution(dilutionNum, createSampleData(sampleNum, replicates)));
+        const createFinalData = (dilutionNum, sampleNum, replicates, scReps) => {
+            let data = standardCurveData(scReps).concat(addDilution(dilutionNum, createSampleData(sampleNum, replicates)));
             if (data.length < 96) {
                 let remaining = 96 - data.length;
                 for (let i = 0; i < remaining; i++) {
@@ -163,7 +166,7 @@ class ViewGeneratedPlate extends Component {
             return this.generateGrid(data);
         }
 
-        createFinalData(plateDilution, plateSample, plateReplicates);
+        createFinalData(plateDilution, plateSample, plateReplicates, scReps);
 
     }
 
