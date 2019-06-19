@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Media } from 'react-bootstrap';
+import { Media, Button } from 'react-bootstrap';
 
 class ViewCombos extends Component {
     constructor(props) {
@@ -49,12 +49,41 @@ class ViewCombos extends Component {
         this.generatePlateCombos(sampleNum);
     }
 
+    sortByCellCount = (array) => {
+        this.setState({
+            combos: array.sort((a, b) => { return b.cellCount - a.cellCount })
+        });
+    }
+
+    sortByDilutions = (array) => {
+        this.setState({
+            combos: array.sort((a, b) => { return b.dilutions - a.dilutions })
+        });
+    }
+
+    sortBySampleReps = (array) => {
+        this.setState({
+            combos: array.sort((a, b) => { return b.replicates - a.replicates })
+        });
+    }
+
+    sortByStandardCurveReps = (array) => {
+        this.setState({
+            combos: array.sort((a, b) => { return b.scReps - a.scReps })
+        });
+    }
+
     render() {
         console.log(this.state);
         return (
             <div className="combo-results">
                 <div>
-                    Plate Combinations for {this.state.sampleNum} Samples
+                    <h3>Plate Combinations for {this.state.sampleNum} Samples</h3>
+                    Sort by:
+                    <Button onClick={() => {this.sortByCellCount(this.state.combos)}}>Cell Count</Button>
+                    <Button onClick={() => {this.sortByDilutions(this.state.combos)}}>Dilutions</Button>
+                    <Button onClick={() => {this.sortBySampleReps(this.state.combos)}}>Sample Reps</Button>
+                    <Button onClick={() => {this.sortByStandardCurveReps(this.state.combos)}}>SC Reps</Button>
                 </div>
                 {this.state.combos.map((combo, index) => {
                     const link = `/view-generated-plate/${combo.samples}/${combo.scReps}/${combo.replicates}/${combo.dilutions}`;
