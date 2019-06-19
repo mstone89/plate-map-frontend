@@ -45,6 +45,7 @@ class ViewGeneratedPlate extends Component {
         let plate = {
             name: this.state.nameInput,
             samples: this.state.samples,
+            sc_reps: this.state.scReps,
             replicates: this.state.replicates,
             dilutions: this.state.dilutions
         }
