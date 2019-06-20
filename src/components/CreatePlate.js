@@ -64,7 +64,7 @@ class CreatePlate extends Component {
                         </Form.Group>
                         <Button className="create-btn" variant="primary" type="submit">See Combinations</Button>
                     </Form>
-                    <img src={image} alt="example plate" />
+                    <img className="example-plate" src={image} alt="example plate" />
                 </div>
             </div>
         )

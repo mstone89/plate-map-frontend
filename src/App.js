@@ -7,6 +7,7 @@ import Plate from './components/Plate';
 import ViewCombos from './components/ViewCombos';
 import SavedPlates from './components/SavedPlates';
 import ViewGeneratedPlate from './components/ViewGeneratedPlate';
+import image from './images/logo-circles.png';
 
 class App extends Component {
     render() {
@@ -14,7 +15,10 @@ class App extends Component {
             <div className="wrapper">
                 <Router>
                     <nav>
-                        <h1 className="logo"><Link to="/">Plate-Map</Link></h1>
+                        <div className="logo-container">
+                            <img src={image} alt="logo" />
+                            <h1 className="logo"><Link to="/">Plate-Map</Link></h1>
+                        </div>
                         <div className="nav-buttons">
                             <Link to="/"><Button className="nav-button">Create</Button></Link>
                             <Link to="/plates"><Button className="nav-button">Saved Plates</Button></Link>
