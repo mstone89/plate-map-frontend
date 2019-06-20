@@ -274,6 +274,8 @@ class Plate extends Component {
 
         return (
             <div className="grid-container">
+                <h3 className="plate-title">{this.state.plate.name}</h3>
+                <div id="grid"></div>
                 <Card>
                     <Card.Body>
                         <Card.Header as="h5">{this.state.plate.name}</Card.Header>
@@ -286,7 +288,6 @@ class Plate extends Component {
                         <Button className="delete-btn" onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
                     </Card.Body>
                 </Card>
-                <div id="grid"></div>
             </div>
         );
     }

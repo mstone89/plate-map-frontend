@@ -80,14 +80,25 @@ img {
     padding-bottom: 20px;
 }
 
+.card {
+    margin: 15px auto 0 auto;
+    width: 300px;
+}
+
 .delete-btn {
     display: block;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
+}
+
+.plate-title {
+    text-align: center;
+    margin: 0;
+    padding-top: 25px;
 }
 
 svg {
     display: block;
-    margin: 75px auto 0 auto;
+    margin: 0 auto;
 }
 
 .saved-plates {
