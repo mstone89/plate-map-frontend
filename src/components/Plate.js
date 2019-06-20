@@ -53,7 +53,8 @@ class Plate extends Component {
                 for (let i = 0; i < sampleNum; i++) {
                     samples.push({
                         name: `sample ${i + 1}`,
-                        color: colors[i]
+                        color: colors[i],
+                        label: `S-${i + 1}`
                     });
                 }
             }
@@ -93,12 +94,14 @@ class Plate extends Component {
                     if (j === 7) {
                         standards.push({
                             name: 'blank',
-                            color: 'white'
+                            color: 'white',
+                            label: 'B'
                         });
                     } else {
                         standards.push({
                             name: `standard ${j + 1}`,
-                            color: 'yellow'
+                            color: 'yellow',
+                            label: `SND-${j + 1}`
                         });
                     }
                 }
@@ -119,7 +122,8 @@ class Plate extends Component {
                 for (let i = 0; i < remaining; i++) {
                     data.push({
                         name: 'blank',
-                        color: 'white'
+                        color: 'white',
+                        label: 'B'
                     });
                 }
             }
@@ -153,6 +157,7 @@ class Plate extends Component {
                     finalArray.push({
                         name: array[i][j].name,
                         color: array[i][j].color,
+                        label: array[i][j].label,
                         x: x,
                         y: y,
                         width: width,
