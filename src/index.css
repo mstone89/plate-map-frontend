@@ -1,9 +1,10 @@
-/* * {
+* {
     border: 1px solid gold;
-} */
+}
 
 body {
   margin: 0;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 nav {
@@ -18,6 +19,12 @@ nav {
     margin: auto 0;
 }
 
+.logo {
+    font-family: 'Cutive Mono', sans-serif;
+    font-size: 3em;
+    font-weight: bold;
+}
+
 .nav-button {
     margin-right: 20px;
 }
@@ -26,9 +33,18 @@ nav {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 100px auto;
-    width: 60%;
+    margin: 75px auto;
     justify-content: center;
+}
+
+h2 {
+    font-family: 'Cutive Mono', sans-serif;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.create-header {
+    padding: 10px;
 }
 
 aside {
@@ -55,11 +71,12 @@ aside > h2 {
 
 .create-btn {
     display: block;
-    margin: 30px auto 0 auto;
+    margin: 15px auto 0 auto;
 }
 
 img {
-    margin: 30px 10px 0 10px;
+    margin: 30px auto 0 auto;
+    padding-bottom: 20px;
 }
 
 .delete-btn {

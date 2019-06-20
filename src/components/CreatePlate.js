@@ -50,9 +50,9 @@ class CreatePlate extends Component {
                 </aside>
                 <div className="right-column">
                     <Form onSubmit={this.handleSubmit}>
-                        <h2>Create New Plates</h2>
+                        <h2 className="create-header">Create New Plates</h2>
                         <Form.Group className="create-form">
-                            <Form.Label>Samples:</Form.Label>
+                            <Form.Label>Number Of Samples:</Form.Label>
                             <Form.Control
                                 required="please indicate number of samples"
                                 type="number"
