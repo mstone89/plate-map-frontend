@@ -57,11 +57,13 @@ class SavedPlates extends Component {
         return (
             <div className="saved-plates">
                 <h3>Saved Plates</h3>
-                Sort by:
-                <Button onClick={() => {this.sortByCellCount(this.state.savedPlates)}}>Cell Count</Button>
-                <Button onClick={() => {this.sortByDilutions(this.state.savedPlates)}}>Dilutions</Button>
-                <Button onClick={() => {this.sortBySampleReps(this.state.savedPlates)}}>Sample Reps</Button>
-                <Button onClick={() => {this.sortByStandardCurveReps(this.state.savedPlates)}}>SC Reps</Button>
+                <div>
+                    Sort by:
+                    <Button size="sm" onClick={() => {this.sortByCellCount(this.state.savedPlates)}}>Cell Count</Button>
+                    <Button size="sm" onClick={() => {this.sortByDilutions(this.state.savedPlates)}}>Dilutions</Button>
+                    <Button size="sm" onClick={() => {this.sortBySampleReps(this.state.savedPlates)}}>Sample Reps</Button>
+                    <Button size="sm" onClick={() => {this.sortByStandardCurveReps(this.state.savedPlates)}}>SC Reps</Button>
+                </div>
                 {this.state.savedPlates.map((plate, index) => {
                     const link = `/view/${plate.id}`;
                     return (
@@ -69,10 +71,10 @@ class SavedPlates extends Component {
                             <Media.Body>
                                 <Link to={link}><h5>{plate.name}</h5></Link>
                                 <p>
-                                    Samples: {plate.samples} /
-                                    Standard Curve Reps: {plate.sc_reps} /
-                                    Replicates: {plate.replicates} /
-                                    Dilutions: {plate.dilutions}
+                                    Samples: <b>{plate.samples}</b> /
+                                    Standard Curve Reps: <b>{plate.sc_reps}</b> /
+                                    Replicates: <b>{plate.replicates}</b> /
+                                    Dilutions: <b>{plate.dilutions}</b>
                                 </p>
                             </Media.Body>
                         </Media>

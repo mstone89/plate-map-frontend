@@ -280,10 +280,10 @@ class Plate extends Component {
                     <Card.Body>
                         <Card.Header as="h5">{this.state.plate.name}</Card.Header>
                         <ListGroup>
-                            <ListGroup.Item>Samples: {this.state.plate.samples}</ListGroup.Item>
-                            <ListGroup.Item>Standard Curve Reps: {this.state.plate.sc_reps}</ListGroup.Item>
-                            <ListGroup.Item>Replicates: {this.state.plate.replicates}</ListGroup.Item>
-                            <ListGroup.Item>Dilutions: {this.state.plate.dilutions}</ListGroup.Item>
+                            <ListGroup.Item>Samples: <b>{this.state.plate.samples}</b></ListGroup.Item>
+                            <ListGroup.Item>Standard Curve Reps: <b>{this.state.plate.sc_reps}</b></ListGroup.Item>
+                            <ListGroup.Item>Replicates: <b>{this.state.plate.replicates}</b></ListGroup.Item>
+                            <ListGroup.Item>Dilutions: <b>{this.state.plate.dilutions}</b></ListGroup.Item>
                         </ListGroup>
                         <Button className="delete-btn" onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
                     </Card.Body>
