@@ -1,81 +1,9 @@
-import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
 import * as d3 from "d3";
-import Helpers from './helper';
 
-const API_URI = process.env.REACT_APP_BACKEND_URI;
+export default {
 
-class ViewGeneratedPlate extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            samples: 0,
-            scReps: 0,
-            replicates: 0,
-            dilutions: 0,
-            nameInput: ''
-        }
-    }
+    generatePlateData: (plateDilution, plateSample, plateReplicates, scReps) => {
 
-    componentDidMount = () => {
-        const path = this.props.location.pathname;
-        const parsePlate = path.split('/');
-        const samples = parseInt(parsePlate[2]);
-        const scReps = parseInt(parsePlate[3]);
-        const replicates = parseInt(parsePlate[4]);
-        const dilutions = parseInt(parsePlate[5]);
-        this.setState({
-            samples: this.state.samples + samples,
-            scReps: this.state.scReps + scReps,
-            replicates: this.state.replicates + replicates,
-            dilutions: this.state.dilutions + dilutions
-        });
-        // let data = Helpers.generatePlateData(dilutions, samples, replicates, scReps);
-        // console.log(data);
-        // let gridData = helpers.generateGrid(8, 12, plateData);
-        // helpers.renderGrid(gridData);
-        this.generatePlateData(dilutions, samples, replicates, scReps);
-        console.log(this.state);
-    }
-
-    handleChange = (e) => {
-        e.preventDefault();
-        this.setState({
-            nameInput: e.target.value
-        });
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        let plate = {
-            name: this.state.nameInput,
-            samples: this.state.samples,
-            sc_reps: this.state.scReps,
-            replicates: this.state.replicates,
-            dilutions: this.state.dilutions
-        }
-        this.handleSavePlate(plate);
-    }
-
-    handleSavePlate = (plate) => {
-        fetch(`${API_URI}/plates`, {
-            body: JSON.stringify(plate),
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(createdPlate => createdPlate.json())
-        .then(data => {
-            this.setState({
-                nameInput: ''
-            })
-        })
-        .catch(err => console.log('create plate error: ', err));
-    }
-
-    generatePlateData = (plateDilution, plateSample, plateReplicates, scReps) => {
         let colors = [
             'tomato', 'orange', 'violet', 'cornflowerblue',
             'slateblue', 'mediumseagreen', 'aqua', 'chartreuse',
@@ -95,6 +23,7 @@ class ViewGeneratedPlate extends Component {
                     });
                 }
             }
+            console.log(samples);
             return samples;
         }
 
@@ -119,6 +48,7 @@ class ViewGeneratedPlate extends Component {
                 if (a.dilution > b.dilution) { return - 1 }
                 return 0;
             });
+            console.log(dilutionData);
             return dilutionData;
         }
 
@@ -141,11 +71,8 @@ class ViewGeneratedPlate extends Component {
                     }
                 }
             }
-            return standards.sort((a, b) => {
-                if (a.name < b.name) { return 1 }
-                if (a.name > b.name) { return - 1 }
-                return 0;
-            });
+            console.log(standards);
+            return standards;
         }
 
         // Take all created data and combine it
@@ -169,14 +96,15 @@ class ViewGeneratedPlate extends Component {
                 }
                 return 0;
             });
-            return this.generateGrid(data);
+            console.log(data);
+            return data;
         }
 
         createFinalData(plateDilution, plateSample, plateReplicates, scReps);
+    },
 
-    }
-
-    generateGrid = (data) => {
+    generateGrid: (rows, columns, data) => {
+        console.log(data);
         const finalizeGridData = (array) => {
             let finalArray = [];
             let x = 1;
@@ -203,7 +131,8 @@ class ViewGeneratedPlate extends Component {
             return finalArray;
         }
 
-        const gridData = (rows, columns) => {
+        const gridData = (rows, columns, data) => {
+            console.log(data);
             let finalData = data;
             let dataForGrid = [];
 
@@ -217,7 +146,7 @@ class ViewGeneratedPlate extends Component {
             return dataForGrid;
         }
 
-        let finalizedData = finalizeGridData(gridData(8, 12));
+        let finalizedData = finalizeGridData(gridData(rows, columns, data));
 
         const gridIt = (rows, columns, array) => {
             let dataForGrid = [];
@@ -227,13 +156,13 @@ class ViewGeneratedPlate extends Component {
                     dataForGrid[row].push(array.shift());
                 }
             }
-            this.renderGrid(dataForGrid)
+            return dataForGrid;
         }
 
-        gridIt(8, 12, finalizedData);
-    }
+        gridIt(rows, columns, finalizedData);
+    },
 
-    renderGrid = (data) => {
+    renderGrid: (data) => {
         let svgWidth = 800;
         let svgHeight = 500;
 
@@ -247,7 +176,7 @@ class ViewGeneratedPlate extends Component {
 
         let yAxis =  d3.axisLeft()
             .scale(yScale)
-            .tickFormat((d) => { return labels[d] })
+            .tickFormat((d) => { return labels[d] });
 
         let grid = d3.select('#grid')
             .append('svg')
@@ -283,27 +212,4 @@ class ViewGeneratedPlate extends Component {
             .attr('transform', 'translate(70, 50)')
             .call(yAxis)
     }
-
-    render() {
-        return (
-            <div>
-                <div id="grid"></div>
-                <Form onSubmit={this.handleSubmit}>
-                    <Form.Group>
-                        <Form.Label>Save Plate</Form.Label>
-                        <Form.Control
-                            required
-                            type="text"
-                            placeholder="enter plate name here"
-                            value={this.state.nameInput}
-                            onChange={this.handleChange}
-                        />
-                        <Button type="submit" variant="outline-secondary">Save Plate</Button>
-                    </Form.Group>
-                </Form>
-            </div>
-        );
-    }
 }
-
-export default ViewGeneratedPlate;
