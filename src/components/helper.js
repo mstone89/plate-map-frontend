@@ -23,7 +23,6 @@ export default {
                     });
                 }
             }
-            console.log(samples);
             return samples;
         }
 
@@ -48,7 +47,6 @@ export default {
                 if (a.dilution > b.dilution) { return - 1 }
                 return 0;
             });
-            console.log(dilutionData);
             return dilutionData;
         }
 
@@ -71,7 +69,6 @@ export default {
                     }
                 }
             }
-            console.log(standards);
             return standards;
         }
 
@@ -96,15 +93,13 @@ export default {
                 }
                 return 0;
             });
-            console.log(data);
             return data;
         }
 
-        createFinalData(plateDilution, plateSample, plateReplicates, scReps);
+        return createFinalData(plateDilution, plateSample, plateReplicates, scReps);
     },
 
     generateGrid: (rows, columns, data) => {
-        console.log(data);
         const finalizeGridData = (array) => {
             let finalArray = [];
             let x = 1;
@@ -159,7 +154,7 @@ export default {
             return dataForGrid;
         }
 
-        gridIt(rows, columns, finalizedData);
+        return gridIt(rows, columns, finalizedData);
     },
 
     renderGrid: (data) => {
