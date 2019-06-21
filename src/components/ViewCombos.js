@@ -78,7 +78,7 @@ class ViewCombos extends Component {
         return (
             <div className="combo-results">
                 <div>
-                    <h3>Plate Combinations for {this.state.sampleNum} Samples</h3>
+                    <h3>Plate Combinations for: {this.state.sampleNum} Samples</h3>
                     Sort by:
                     <Button onClick={() => {this.sortByCellCount(this.state.combos)}}>Cell Count</Button>
                     <Button onClick={() => {this.sortByDilutions(this.state.combos)}}>Dilutions</Button>
@@ -92,11 +92,11 @@ class ViewCombos extends Component {
                             <Media.Body>
                                 <Link to={link}><h5>Plate Combination {index + 1}</h5></Link>
                                 <p>
-                                    Samples: {combo.samples} /
-                                    Standard Curve Reps: {combo.scReps} /
-                                    Sample Reps: {combo.replicates} /
-                                    Dilutions: {combo.dilutions} /
-                                    Cell Count: {combo.cellCount}
+                                    Samples: <b>{combo.samples}</b> /
+                                    Standard Curve Reps: <b>{combo.scReps}</b> /
+                                    Sample Reps: <b>{combo.replicates}</b> /
+                                    Dilutions: <b>{combo.dilutions}</b> /
+                                    Cell Count: <b>{combo.cellCount}</b>
                                 </p>
                             </Media.Body>
                         </Media>
