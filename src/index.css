@@ -173,3 +173,15 @@ b {
 .combo-results > div {
     margin: 20px 0 30px 0;
 }
+
+.create-form > .form-control {
+    display: inline;
+    width: 50px;
+    margin: 0 15px;
+}
+
+.form-group, .create-form {
+    width: 300px;
+    margin: 0 auto;
+    margin-left: 125px;
+}
