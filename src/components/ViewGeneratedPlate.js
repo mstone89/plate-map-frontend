@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Card, ListGroup } from 'react-bootstrap';
 import * as d3 from "d3";
 import Helpers from './helper';
 
@@ -75,7 +75,8 @@ class ViewGeneratedPlate extends Component {
 
     render() {
         return (
-            <div>
+            <div className="grid-container">
+                <h3 className="plate-title">Generated Plate</h3>
                 <div id="grid"></div>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group>
@@ -90,6 +91,18 @@ class ViewGeneratedPlate extends Component {
                         <Button type="submit" variant="outline-secondary">Save Plate</Button>
                     </Form.Group>
                 </Form>
+                <Card>
+                    <Card.Body>
+                        <Card.Header as="h5">Generated Plate</Card.Header>
+                        <ListGroup>
+                            <ListGroup.Item>Samples: <b>{this.state.samples}</b></ListGroup.Item>
+                            <ListGroup.Item>Standard Curve Reps: <b>{this.state.scReps}</b></ListGroup.Item>
+                            <ListGroup.Item>Replicates: <b>{this.state.replicates}</b></ListGroup.Item>
+                            <ListGroup.Item>Dilutions: <b>{this.state.dilutions}</b></ListGroup.Item>
+                        </ListGroup>
+                        <Button className="delete-btn" onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
+                    </Card.Body>
+                </Card>
             </div>
         );
     }
