@@ -27,10 +27,9 @@ class Plate extends Component {
                 this.setState({
                     plate: jsonData
                 });
-                console.log(jsonData);
                 let plateData = Helpers.generatePlateData(this.state.plate.dilutions, this.state.plate.samples, this.state.plate.replicates, this.state.plate.sc_reps);
                 let gridData = Helpers.generateGrid(8, 12, plateData);
-                Helpers.renderGrid(gridData);
+                Helpers.renderGrid(gridData, 800, 500);
             })
             .catch(err => console.log('view plate error: ', err));
     }
@@ -39,7 +38,6 @@ class Plate extends Component {
         fetch(`${API_URI}/plates/${this.state.plate.id}`, {
             method: 'DELETE'
         }).then(data => {
-            console.log('deleted data');
         }).catch(err => console.log('delete plate error: ', err));
         this.setState({
             redirect: true
@@ -47,7 +45,6 @@ class Plate extends Component {
     }
 
     render() {
-        console.log(this.state.plateData);
         if (this.state.redirect) {
             return <Redirect to="/" />
         }

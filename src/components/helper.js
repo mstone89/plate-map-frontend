@@ -157,9 +157,9 @@ export default {
         return gridIt(rows, columns, finalizedData);
     },
 
-    renderGrid: (data) => {
-        let svgWidth = 800;
-        let svgHeight = 500;
+    renderGrid: (data, width, height) => {
+        let svgWidth = width;
+        let svgHeight = height;
 
         let labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 

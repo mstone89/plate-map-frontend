@@ -19,7 +19,6 @@ class SavedPlates extends Component {
                 this.setState({
                     savedPlates: jsonData
                 });
-                console.log(this.state.savedPlates);
             })
             .catch(err => console.log('view plates error: ', err));
     }
@@ -53,7 +52,6 @@ class SavedPlates extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className="saved-plates">
                 <div>
