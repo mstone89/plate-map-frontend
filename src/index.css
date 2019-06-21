@@ -138,7 +138,7 @@ svg {
     text-align: center;
 }
 
-.saved-plates > div > button {
+.sort-buttons > button {
     margin: 0 7px;
 }
 
@@ -161,10 +161,6 @@ h5:hover {
 
 b {
     color: rgba(0, 139, 139, 1);
-}
-
-.combo-results > div > button {
-    margin: 0 7px;
 }
 
 .combo-results > div > h3 {

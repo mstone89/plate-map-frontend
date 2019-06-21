@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Media, Button } from 'react-bootstrap';
+import { Media } from 'react-bootstrap';
+import SortButtons from './SortButtons';
 
 const API_URI = process.env.REACT_APP_BACKEND_URI;
 
@@ -57,11 +58,13 @@ class SavedPlates extends Component {
             <div className="saved-plates">
                 <div>
                     <h3>Saved Plates</h3>
-                    Sort by:
-                    <Button size="sm" onClick={() => {this.sortByCellCount(this.state.savedPlates)}}>Cell Count</Button>
-                    <Button size="sm" onClick={() => {this.sortByDilutions(this.state.savedPlates)}}>Dilutions</Button>
-                    <Button size="sm" onClick={() => {this.sortBySampleReps(this.state.savedPlates)}}>Sample Reps</Button>
-                    <Button size="sm" onClick={() => {this.sortByStandardCurveReps(this.state.savedPlates)}}>SC Reps</Button>
+                    <SortButtons
+                        plateData={this.state.savedPlates}
+                        sortByCellCount={this.sortByCellCount}
+                        sortByDilutions={this.sortByDilutions}
+                        sortBySampleReps={this.sortBySampleReps}
+                        sortByStandardCurveReps={this.sortByStandardCurveReps}
+                    />
                 </div>
                 {this.state.savedPlates.map((plate, index) => {
                     const link = `/view/${plate.id}`;
