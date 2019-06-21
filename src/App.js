@@ -29,7 +29,7 @@ class App extends Component {
                         <Route path="/plates" component={SavedPlates} />
                         <Route path="/view/:id" component={Plate} />
                         <Route path="/combos/:sampleInput" component={ViewCombos} />
-                        <Route path="/view-generated-plate/:samples/:replicates/:dilutions" component={ViewGeneratedPlate} />
+                        <Route path="/view-generated-plate/:samples/:replicates/:dilutions/:cellcount" component={ViewGeneratedPlate} />
                     </Switch>
                 </Router>
             </div>

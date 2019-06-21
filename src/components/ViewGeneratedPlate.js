@@ -13,6 +13,7 @@ class ViewGeneratedPlate extends Component {
             scReps: 0,
             replicates: 0,
             dilutions: 0,
+            cellcount: 0,
             nameInput: ''
         }
     }
@@ -24,11 +25,13 @@ class ViewGeneratedPlate extends Component {
         const scReps = parseInt(parsePlate[3]);
         const replicates = parseInt(parsePlate[4]);
         const dilutions = parseInt(parsePlate[5]);
+        const cellcount = parseInt(parsePlate[6]);
         this.setState({
             samples: this.state.samples + samples,
             scReps: this.state.scReps + scReps,
             replicates: this.state.replicates + replicates,
-            dilutions: this.state.dilutions + dilutions
+            dilutions: this.state.dilutions + dilutions,
+            cellcount: this.state.cellcount + cellcount
         });
         let data = Helpers.generatePlateData(dilutions, samples, replicates, scReps);
         let gridData = Helpers.generateGrid(8, 12, data);
@@ -50,7 +53,8 @@ class ViewGeneratedPlate extends Component {
             samples: this.state.samples,
             sc_reps: this.state.scReps,
             replicates: this.state.replicates,
-            dilutions: this.state.dilutions
+            dilutions: this.state.dilutions,
+            cellcount: this.state.cellcount
         }
         this.handleSavePlate(plate);
     }
@@ -99,8 +103,8 @@ class ViewGeneratedPlate extends Component {
                             <ListGroup.Item>Standard Curve Reps: <b>{this.state.scReps}</b></ListGroup.Item>
                             <ListGroup.Item>Replicates: <b>{this.state.replicates}</b></ListGroup.Item>
                             <ListGroup.Item>Dilutions: <b>{this.state.dilutions}</b></ListGroup.Item>
+                            <ListGroup.Item>Cell Count: <b>{this.state.cellcount}</b></ListGroup.Item>
                         </ListGroup>
-                        <Button className="delete-btn" onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
                     </Card.Body>
                 </Card>
             </div>

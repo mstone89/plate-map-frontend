@@ -86,7 +86,7 @@ class ViewCombos extends Component {
                     <Button size="sm" onClick={() => {this.sortByStandardCurveReps(this.state.combos)}}>SC Reps</Button>
                 </div>
                 {this.state.combos.map((combo, index) => {
-                    const link = `/view-generated-plate/${combo.samples}/${combo.scReps}/${combo.replicates}/${combo.dilutions}`;
+                    const link = `/view-generated-plate/${combo.samples}/${combo.scReps}/${combo.replicates}/${combo.dilutions}/${combo.cellCount}`;
                     return (
                         <Media key={index}>
                             <Media.Body>
