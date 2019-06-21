@@ -100,6 +100,7 @@ export default {
     },
 
     generateGrid: (rows, columns, data) => {
+        console.log(data);
         const finalizeGridData = (array) => {
             let finalArray = [];
             let x = 1;
@@ -153,11 +154,10 @@ export default {
             }
             return dataForGrid;
         }
-
         return gridIt(rows, columns, finalizedData);
     },
 
-    renderGrid: (data, width, height) => {
+    renderGridOne: (data, width, height, id) => {
         let svgWidth = width;
         let svgHeight = height;
 
@@ -173,7 +173,7 @@ export default {
             .scale(yScale)
             .tickFormat((d) => { return labels[d] });
 
-        let grid = d3.select('#grid')
+        let grid = d3.select(id)
             .append('svg')
             .attr('width', svgWidth)
             .attr('height', svgHeight)

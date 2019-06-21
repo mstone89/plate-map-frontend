@@ -28,8 +28,8 @@ class Plate extends Component {
                     plate: jsonData
                 });
                 let plateData = Helpers.generatePlateData(this.state.plate.dilutions, this.state.plate.samples, this.state.plate.replicates, this.state.plate.sc_reps);
-                let gridData = Helpers.generateGrid(8, 12, plateData);
-                Helpers.renderGrid(gridData, 800, 500);
+                let gridData1 = Helpers.generateGrid(8, 12, plateData);
+                Helpers.renderGridOne(gridData1, 800, 500, '#grid1');
             })
             .catch(err => console.log('view plate error: ', err));
     }
@@ -52,7 +52,8 @@ class Plate extends Component {
         return (
             <div className="grid-container">
                 <h3 className="plate-title">{this.state.plate.name}</h3>
-                <div id="grid"></div>
+                <div id="grid1"></div>
+                <div id="grid2"></div>
                 <Card>
                     <Card.Body>
                         <Card.Header as="h5">{this.state.plate.name}</Card.Header>
