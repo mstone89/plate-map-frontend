@@ -28,10 +28,6 @@ button {
     text-decoration-color: tomato;
 }
 
-.logo > a:hover {
-    text-decoration: none;
-}
-
 .logo-container {
     display: flex;
     flex-direction: row;
