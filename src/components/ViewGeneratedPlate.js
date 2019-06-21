@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Form, Card, ListGroup } from 'react-bootstrap';
-import * as d3 from "d3";
 import Helpers from './helper';
 
 const API_URI = process.env.REACT_APP_BACKEND_URI;
@@ -36,7 +35,6 @@ class ViewGeneratedPlate extends Component {
         let data = Helpers.generatePlateData(dilutions, samples, replicates, scReps);
         let gridData = Helpers.generateGrid(8, 12, data);
         Helpers.renderGrid(gridData, 800, 500, '#grid');
-        console.log(this.state);
     }
 
     handleChange = (e) => {

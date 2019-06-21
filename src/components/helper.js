@@ -100,7 +100,6 @@ export default {
     },
 
     generateGrid: (rows, columns, data) => {
-        console.log(data);
         const finalizeGridData = (array) => {
             let finalArray = [];
             let x = 1;
@@ -128,7 +127,6 @@ export default {
         }
 
         const gridData = (rows, columns, data) => {
-            console.log(data);
             let finalData = data;
             let dataForGrid = [];
 
