@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Media, Button } from 'react-bootstrap';
+import { Media } from 'react-bootstrap';
+import SortButtons from './SortButtons';
 
 class ViewCombos extends Component {
     constructor(props) {
@@ -74,16 +75,18 @@ class ViewCombos extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className="combo-results">
                 <div>
                     <h3>Plate Combinations for: {this.state.sampleNum} Samples</h3>
                     Sort by:
-                    <Button size="sm" onClick={() => {this.sortByCellCount(this.state.combos)}}>Cell Count</Button>
-                    <Button size="sm" onClick={() => {this.sortByDilutions(this.state.combos)}}>Dilutions</Button>
-                    <Button size="sm" onClick={() => {this.sortBySampleReps(this.state.combos)}}>Sample Reps</Button>
-                    <Button size="sm" onClick={() => {this.sortByStandardCurveReps(this.state.combos)}}>SC Reps</Button>
+                    <SortButtons
+                        plateData={this.state.combos}
+                        sortByCellCount={this.sortByCellCount}
+                        sortByDilutions={this.sortByDilutions}
+                        sortBySampleReps={this.sortBySampleReps}
+                        sortByStandardCurveReps={this.sortByStandardCurveReps}
+                    />
                 </div>
                 {this.state.combos.map((combo, index) => {
                     const link = `/view-generated-plate/${combo.samples}/${combo.scReps}/${combo.replicates}/${combo.dilutions}/${combo.cellCount}`;
