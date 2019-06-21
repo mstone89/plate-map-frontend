@@ -80,10 +80,10 @@ class ViewCombos extends Component {
                 <div>
                     <h3>Plate Combinations for: {this.state.sampleNum} Samples</h3>
                     Sort by:
-                    <Button onClick={() => {this.sortByCellCount(this.state.combos)}}>Cell Count</Button>
-                    <Button onClick={() => {this.sortByDilutions(this.state.combos)}}>Dilutions</Button>
-                    <Button onClick={() => {this.sortBySampleReps(this.state.combos)}}>Sample Reps</Button>
-                    <Button onClick={() => {this.sortByStandardCurveReps(this.state.combos)}}>SC Reps</Button>
+                    <Button size="sm" onClick={() => {this.sortByCellCount(this.state.combos)}}>Cell Count</Button>
+                    <Button size="sm" onClick={() => {this.sortByDilutions(this.state.combos)}}>Dilutions</Button>
+                    <Button size="sm" onClick={() => {this.sortBySampleReps(this.state.combos)}}>Sample Reps</Button>
+                    <Button size="sm" onClick={() => {this.sortByStandardCurveReps(this.state.combos)}}>SC Reps</Button>
                 </div>
                 {this.state.combos.map((combo, index) => {
                     const link = `/view-generated-plate/${combo.samples}/${combo.scReps}/${combo.replicates}/${combo.dilutions}`;

@@ -56,8 +56,8 @@ class SavedPlates extends Component {
         console.log(this.state);
         return (
             <div className="saved-plates">
-                <h3>Saved Plates</h3>
                 <div>
+                    <h3>Saved Plates</h3>
                     Sort by:
                     <Button size="sm" onClick={() => {this.sortByCellCount(this.state.savedPlates)}}>Cell Count</Button>
                     <Button size="sm" onClick={() => {this.sortByDilutions(this.state.savedPlates)}}>Dilutions</Button>
