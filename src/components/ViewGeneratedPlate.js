@@ -32,7 +32,7 @@ class ViewGeneratedPlate extends Component {
         });
         let data = Helpers.generatePlateData(dilutions, samples, replicates, scReps);
         let gridData = Helpers.generateGrid(8, 12, data);
-        Helpers.renderGrid(gridData, 800, 500);
+        Helpers.renderGrid(gridData, 800, 500, '#grid');
         console.log(this.state);
     }
 

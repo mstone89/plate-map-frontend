@@ -157,7 +157,7 @@ export default {
         return gridIt(rows, columns, finalizedData);
     },
 
-    renderGridOne: (data, width, height, id) => {
+    renderGrid: (data, width, height, id) => {
         let svgWidth = width;
         let svgHeight = height;
 
