@@ -105,7 +105,7 @@ aside > h2 {
 }
 
 .card {
-    margin: 15px auto 0 auto;
+    margin: 15px auto;
     width: 300px;
 }
 
@@ -184,4 +184,15 @@ b {
     width: 300px;
     margin: 0 auto;
     margin-left: 125px;
+}
+
+.save-plate {
+    display: block;
+    margin: 0 auto 40px auto;
+}
+
+.save-plate > button {
+    color: white;
+    display: block;
+    margin: 10px auto;
 }

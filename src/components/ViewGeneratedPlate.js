@@ -83,7 +83,7 @@ class ViewGeneratedPlate extends Component {
                 <h3 className="plate-title">Generated Plate</h3>
                 <div id="grid"></div>
                 <Form onSubmit={this.handleSubmit}>
-                    <Form.Group>
+                    <Form.Group className="save-plate">
                         <Form.Label>Save Plate</Form.Label>
                         <Form.Control
                             required
