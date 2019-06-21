@@ -107,6 +107,7 @@ aside > h2 {
 .card {
     margin: 15px auto;
     width: 300px;
+    border: 1px solid rgba(0, 139, 139, .25);
 }
 
 .delete-btn {
@@ -176,7 +177,7 @@ b {
 
 .create-form > .form-control {
     display: inline;
-    width: 50px;
+    width: 75px;
     margin: 0 15px;
 }
 
