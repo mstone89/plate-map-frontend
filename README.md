@@ -1,68 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Plate-Map
+======
 
-## Available Scripts
+### Technologies Used
 
-In the project directory, you can run:
+This app was created with:
 
-### `npm start`
+- Ruby on Rails
+- ReactJS
+- PostgresSQL
+- NodeJS
+- D3.JS
+- [React Router](https://reacttraining.com/react-router/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This app is:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Deployed on [Heroku](https://plate-map-app.herokuapp.com/)
+- Hosted on GitHub. [See API Repo](https://github.com/mstone89/plate-map-api).
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### About Plate-Map
 
-### `npm run build`
+Plate-Map is a one-model application that generates and stores plate assay data. It is designed to assist in planning out plate assays based on a number of inputted samples. The app generates combinations for diluting and replicating samples based on input, as well as a visual grid (built with D3) of how those samples, dilutions, and replicates might look on a 96 well plate format. Users can store chosen plate combinations for later use, and delete them as needed.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Approach
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A 96 well plate can have any number of samples tested. Currently, this app allows for up to 16 testable samples.
 
-### `npm run eject`
+These samples can be duplicated (AKA replicated) a certain number of times. They can also be diluted a certain number of times as well.
+In addition, samples that are replicated and diluted are also tested against standard curve samples. It is also a good practice to leave some wells in the plate empty or "blank."
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+With all of these factors, and given a variable number of samples to test, it can be difficult to determine how many times a sample can be replicated and diluted, and how many times the standard curve samples can be replicated as well.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To tackle this, a few JS algorithms were created to generate plate combinations. A final set of data is created using each combination of samples, dilutions, replicates, blank wells, and standard curves, which is then used to create a visual of how the plate map might look with a particular combination.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This app is meant to take the guesswork out of creating plate assays when you're not sure how many times you can replicate or dilute a given number of samples.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### User Stories
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> As a user, I can input a sample number and see plate combinations.
+> As a user, I can choose a plate combination and see a visual of that plate.
+> As a user, I can save a chosen plate combination for later use.
+> As a user, I can sort combinations by dilutions, replicates, standard curve replicates, or well count.
+> As a user, I can see my saved plates in a list.
+> As a user, I can choose a saved plate and see the visual of that plate.
+> As a user, I can delete saved plates.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### Future Improvements
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Show a small rendering of how the grid will look within the list of combinations (show a preview without clicking a combo).
+- Right now, 2 possible renderings of the grid are shown. For a future improvement, all more options where samples are grouped together rather than shown in a horizontal or vertical line.
+- Export full dataset for a particular combination into a .csv file.
