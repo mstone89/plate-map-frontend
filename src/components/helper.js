@@ -164,8 +164,16 @@ export default {
             .domain([0, 7])
             .range([svgHeight - 120, 20]);
 
-        let yAxis =  d3.axisLeft()
+        let yAxis = d3.axisLeft()
             .scale(yScale)
+            .tickFormat((d) => { return labels[d] });
+
+        let xScale = d3.scaleLinear()
+            .domain([0, 7])
+            .range([svgWidth - 120, 20])
+
+        let xAxis = d3.axisTop()
+            .scale(xScale)
             .tickFormat((d) => { return labels[d] });
 
         let grid = d3.select(id)
@@ -201,7 +209,13 @@ export default {
         if (shouldRotate) {
             grid.attr('transform', 'translate(0, -100)rotate(-90)');
 
+            grid.append('g')
+                .attr('class', 'axis')
+                .attr('transform', 'translate(50, 73)')
+                .call(xAxis);
+
             row.attr('transform', 'translate(50,100)');
+
         } else {
             row.attr('transform', 'translate(98,50)');
 
