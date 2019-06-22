@@ -152,46 +152,7 @@ export default {
         return gridIt(rows, columns, finalizedData);
     },
 
-    renderGrid: (data, width, height, id) => {
-        // let svgWidth = width;
-        // let svgHeight = height;
-        //
-        // const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-        //
-        // let grid = d3.select(id)
-        //     .append('svg')
-        //     // .attr('class', 'grid2')
-        //     .attr('width', svgWidth)
-        //     .attr('height', svgHeight)
-        //
-        //
-        // let row = grid.selectAll('.row')
-        //     .data(data)
-        //     .enter().append('g')
-        //     .attr('class', 'row')
-        //
-        // let column = row.selectAll('.circle')
-        //     .data((d) => { return d })
-        //     .enter().append('circle')
-        //     .attr('class', 'circle')
-        //     .attr('cx', (d) => { return d.x + 25 })
-        //     .attr('cy', (d) => { return d.y + 25 })
-        //     .attr('r', 20)
-        //     .style('fill', (d) => { return d.color })
-        //     .style('stroke', (d) => {
-        //         if (d.color === 'white') {
-        //             return '#aaa';
-        //         }
-        //     })
-        //     .style('margin-right', 2)
-        //     .style('opacity', (d) => {
-        //         if (d.dilution !== undefined) {
-        //             return d.dilution;
-        //         }
-        //     });
-        //
-        // grid.attr('transform', 'translate(150, -250)rotate(-90)')
-
+    renderGrid: (data, width, height, id, shouldRotate) => {
         let svgWidth = width;
         let svgHeight = height;
 
@@ -216,7 +177,6 @@ export default {
         let row = grid.selectAll('.row')
             .data(data)
             .enter().append('g')
-            .attr('transform', 'translate(98,50)')
             .attr('class', 'row');
 
         row.selectAll('.circle')
@@ -238,8 +198,17 @@ export default {
                 }
             });
 
-        grid.append('g')
-            .attr('transform', 'translate(70, 50)')
-            .call(yAxis)
+        if (shouldRotate) {
+            grid.attr('transform', 'translate(0, -100)rotate(-90)');
+
+            row.attr('transform', 'translate(50,100)');
+        } else {
+            row.attr('transform', 'translate(98,50)');
+
+            grid.append('g')
+                .attr('class', 'axis')
+                .attr('transform', 'translate(70, 50)')
+                .call(yAxis);
+        }
     }
 }

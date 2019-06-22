@@ -29,10 +29,10 @@ class Plate extends Component {
                 });
                 let plateData = Helpers.generatePlateData(this.state.plate.dilutions, this.state.plate.samples, this.state.plate.replicates, this.state.plate.sc_reps);
                 let gridData = Helpers.generateGrid(8, 12, plateData);
-                Helpers.renderGrid(gridData, 800, 500, '#grid1');
+                Helpers.renderGrid(gridData, 800, 500, '#grid1', false);
                 let plateData2 = Helpers.generatePlateData(this.state.plate.dilutions, this.state.plate.samples, this.state.plate.replicates, this.state.plate.sc_reps);
                 let gridData2 = Helpers.generateGrid(12, 8, plateData2)
-                Helpers.renderGrid(gridData2, 500, 800, '#grid2');
+                Helpers.renderGrid(gridData2, 500, 800, '#grid2', true);
 
             })
             .catch(err => console.log('view plate error: ', err));
