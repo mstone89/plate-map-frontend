@@ -60,6 +60,10 @@ button {
     justify-content: center;
 }
 
+p {
+    font-size: 1.1em;
+}
+
 h2, h3 {
     font-family: 'Cutive Mono', sans-serif;
     font-size: 2.5em;
