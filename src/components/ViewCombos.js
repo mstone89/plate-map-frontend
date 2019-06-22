@@ -98,7 +98,7 @@ class ViewCombos extends Component {
                                     Standard Curve Reps: <b>{combo.scReps}</b> /
                                     Sample Reps: <b>{combo.replicates}</b> /
                                     Dilutions: <b>{combo.dilutions}</b> /
-                                    Cell Count: <b>{combo.cellCount}</b>
+                                    Well Count: <b>{combo.cellCount}</b>
                                 </p>
                             </Media.Body>
                         </Media>

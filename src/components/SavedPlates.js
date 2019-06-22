@@ -49,7 +49,7 @@ class SavedPlates extends Component {
 
     sortByStandardCurveReps = (array) => {
         this.setState({
-            combos: array.sort((a, b) => { return b.scReps - a.scReps })
+            combos: array.sort((a, b) => { return b.sc_reps - a.sc_reps })
         });
     }
 
@@ -77,7 +77,7 @@ class SavedPlates extends Component {
                                     Standard Curve Reps: <b>{plate.sc_reps}</b> /
                                     Replicates: <b>{plate.replicates}</b> /
                                     Dilutions: <b>{plate.dilutions}</b> /
-                                    Cell Count: <b>{plate.cellcount}</b>
+                                    Well Count: <b>{plate.cellcount}</b>
                                 </p>
                             </Media.Body>
                         </Media>

@@ -67,7 +67,7 @@ class Plate extends Component {
                             <ListGroup.Item><img className="sc-yellow" src={image} alt="sc-color-yellow"/> Standard Curve Reps: <b>{this.state.plate.sc_reps}</b></ListGroup.Item>
                             <ListGroup.Item>Replicates: <b>{this.state.plate.replicates}</b></ListGroup.Item>
                             <ListGroup.Item>Dilutions: <b>{this.state.plate.dilutions}</b></ListGroup.Item>
-                            <ListGroup.Item>Cell Count: <b>{this.state.plate.cellcount}</b></ListGroup.Item>
+                            <ListGroup.Item>Well Count: <b>{this.state.plate.cellcount}</b></ListGroup.Item>
                         </ListGroup>
                         <Button className="delete-btn" onClick={() => this.handleDelete(this.state.plate.id)}>Delete Plate</Button>
                     </Card.Body>

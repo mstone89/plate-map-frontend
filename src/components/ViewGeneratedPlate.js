@@ -107,7 +107,7 @@ class ViewGeneratedPlate extends Component {
                             <ListGroup.Item><img className="sc-yellow" src={image} alt="sc-color-yellow"/> Standard Curve Reps: <b>{this.state.scReps}</b></ListGroup.Item>
                             <ListGroup.Item>Replicates: <b>{this.state.replicates}</b></ListGroup.Item>
                             <ListGroup.Item>Dilutions: <b>{this.state.dilutions}</b></ListGroup.Item>
-                            <ListGroup.Item>Cell Count: <b>{this.state.cellcount}</b></ListGroup.Item>
+                            <ListGroup.Item>Well Count: <b>{this.state.cellcount}</b></ListGroup.Item>
                         </ListGroup>
                     </Card.Body>
                 </Card>
