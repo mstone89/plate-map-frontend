@@ -3,7 +3,6 @@ import * as d3 from "d3";
 export default {
 
     generatePlateData: (plateDilution, plateSample, plateReplicates, scReps) => {
-
         let colors = [
             'tomato', 'orange', 'violet', 'cornflowerblue',
             'slateblue', 'mediumseagreen', 'aqua', 'chartreuse',
@@ -11,7 +10,6 @@ export default {
             'deeppink', 'magenta', 'limegreen', 'red'
         ]
 
-        // Given number of samples and replicates, duplicate samples
         const createSampleData = (sampleNum, replicates) => {
             let samples = [];
 
@@ -25,8 +23,7 @@ export default {
             }
             return samples;
         }
-
-        // Add dilution to sample data
+        // add dilution
         const addDilution = (dilutionNum, sampleData) => {
             let dilutionData = [];
             let opacity = dilutionNum;
@@ -47,10 +44,9 @@ export default {
                 if (a.dilution > b.dilution) { return - 1 }
                 return 0;
             });
-            return dilutionData;
+            return dilutionData
         }
 
-        // Create standard curve data
         const standardCurveData = (scReps) => {
             let standards = [];
 
@@ -69,10 +65,9 @@ export default {
                     }
                 }
             }
-            return standards;
+            return standards
         }
 
-        // Take all created data and combine it
         const createFinalData = (dilutionNum, sampleNum, replicates, scReps) => {
             let data = standardCurveData(scReps).concat(addDilution(dilutionNum, createSampleData(sampleNum, replicates)));
             if (data.length < 96) {
@@ -80,11 +75,12 @@ export default {
                 for (let i = 0; i < remaining; i++) {
                     data.push({
                         name: 'blank',
-                        color: 'white'
+                        color: 'white',
+                        label: 'B'
                     });
                 }
             }
-            data = data.sort((a, b) => {
+            return data.sort((a, b) => {
                 if (a.color < b.color) {
                     return 1;
                 }
@@ -93,7 +89,6 @@ export default {
                 }
                 return 0;
             });
-            return data;
         }
 
         return createFinalData(plateDilution, plateSample, plateReplicates, scReps);
@@ -112,6 +107,7 @@ export default {
                     finalArray.push({
                         name: array[i][j].name,
                         color: array[i][j].color,
+                        label: array[i][j].label,
                         x: x,
                         y: y,
                         width: width,
@@ -152,10 +148,50 @@ export default {
             }
             return dataForGrid;
         }
+
         return gridIt(rows, columns, finalizedData);
     },
 
     renderGrid: (data, width, height, id) => {
+        // let svgWidth = width;
+        // let svgHeight = height;
+        //
+        // const labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        //
+        // let grid = d3.select(id)
+        //     .append('svg')
+        //     // .attr('class', 'grid2')
+        //     .attr('width', svgWidth)
+        //     .attr('height', svgHeight)
+        //
+        //
+        // let row = grid.selectAll('.row')
+        //     .data(data)
+        //     .enter().append('g')
+        //     .attr('class', 'row')
+        //
+        // let column = row.selectAll('.circle')
+        //     .data((d) => { return d })
+        //     .enter().append('circle')
+        //     .attr('class', 'circle')
+        //     .attr('cx', (d) => { return d.x + 25 })
+        //     .attr('cy', (d) => { return d.y + 25 })
+        //     .attr('r', 20)
+        //     .style('fill', (d) => { return d.color })
+        //     .style('stroke', (d) => {
+        //         if (d.color === 'white') {
+        //             return '#aaa';
+        //         }
+        //     })
+        //     .style('margin-right', 2)
+        //     .style('opacity', (d) => {
+        //         if (d.dilution !== undefined) {
+        //             return d.dilution;
+        //         }
+        //     });
+        //
+        // grid.attr('transform', 'translate(150, -250)rotate(-90)')
+
         let svgWidth = width;
         let svgHeight = height;
 
@@ -173,6 +209,7 @@ export default {
 
         let grid = d3.select(id)
             .append('svg')
+            .attr('class', 'grid1')
             .attr('width', svgWidth)
             .attr('height', svgHeight)
 

@@ -35,6 +35,9 @@ class ViewGeneratedPlate extends Component {
         let data = Helpers.generatePlateData(dilutions, samples, replicates, scReps);
         let gridData = Helpers.generateGrid(8, 12, data);
         Helpers.renderGrid(gridData, 800, 500, '#grid');
+        let plateData2 = Helpers.generatePlateData(dilutions, samples, replicates, scReps);
+        let gridData2 = Helpers.generateGrid(12, 8, plateData2)
+        Helpers.renderGrid(gridData2, 500, 800, '#grid2');
     }
 
     handleChange = (e) => {
@@ -80,6 +83,7 @@ class ViewGeneratedPlate extends Component {
             <div className="grid-container">
                 <h3 className="plate-title">Generated Plate</h3>
                 <div id="grid"></div>
+                <div id="grid2"></div>
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group className="save-plate">
                         <Form.Label>Save Plate</Form.Label>

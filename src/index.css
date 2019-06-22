@@ -1,6 +1,6 @@
-/* * {
+* {
     border: 1px solid gold;
-} */
+}
 
 body {
   margin: 0;
@@ -121,7 +121,12 @@ aside > h2 {
     padding-top: 25px;
 }
 
-svg {
+.grid1 {
+    display: block;
+    margin: 0 auto;
+}
+
+.grid2 {
     display: block;
     margin: 0 auto;
 }
