@@ -5,7 +5,7 @@ class SortButtons extends Component {
     render() {
         return (
             <div className="sort-buttons">
-                Sort by:
+                Sort by (ascending):
                 <Button size="sm" onClick={() => {this.props.sortByCellCount(this.props.plateData)}}>Cell Count</Button>
                 <Button size="sm" onClick={() => {this.props.sortByDilutions(this.props.plateData)}}>Dilutions</Button>
                 <Button size="sm" onClick={() => {this.props.sortBySampleReps(this.props.plateData)}}>Sample Reps</Button>

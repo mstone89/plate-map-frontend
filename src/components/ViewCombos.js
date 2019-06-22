@@ -79,7 +79,6 @@ class ViewCombos extends Component {
             <div className="combo-results">
                 <div>
                     <h3>Plate Combinations for: {this.state.sampleNum} Samples</h3>
-                    Sort by:
                     <SortButtons
                         plateData={this.state.combos}
                         sortByCellCount={this.sortByCellCount}
