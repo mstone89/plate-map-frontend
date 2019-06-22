@@ -1,4 +1,4 @@
-Plate-Map
+[Plate-Map](https://plate-map-app.herokuapp.com/)
 ======
 
 ### Technologies Used
@@ -36,6 +36,11 @@ With all of these factors, and given a variable number of samples to test, it ca
 To tackle this, a few JS algorithms were created to generate plate combinations. A final set of data is created using each combination of samples, dilutions, replicates, blank wells, and standard curve replicates, which is then used to create a visual of how the plate map might look with a particular combination.
 
 This app is meant to take the guesswork out of creating plate assays when you're not sure how many times you can replicate or dilute a given number of samples.
+
+
+### Wireframe
+
+![alt-text](https://github.com/mstone89/plate-map-frontend/blob/master/plate-map-wireframe.png)
 
 
 ### User Stories
