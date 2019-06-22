@@ -34,10 +34,10 @@ class ViewGeneratedPlate extends Component {
         });
         let data = Helpers.generatePlateData(dilutions, samples, replicates, scReps);
         let gridData = Helpers.generateGrid(8, 12, data);
-        Helpers.renderGrid(gridData, 800, 500, '#grid');
+        Helpers.renderGrid(gridData, 800, 500, '#grid', false);
         let plateData2 = Helpers.generatePlateData(dilutions, samples, replicates, scReps);
         let gridData2 = Helpers.generateGrid(12, 8, plateData2)
-        Helpers.renderGrid(gridData2, 500, 800, '#grid2');
+        Helpers.renderGrid(gridData2, 500, 800, '#grid2', true);
     }
 
     handleChange = (e) => {
