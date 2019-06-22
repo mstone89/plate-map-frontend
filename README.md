@@ -33,7 +33,7 @@ In addition, samples that are replicated and diluted are also tested against sta
 
 With all of these factors, and given a variable number of samples to test, it can be difficult to determine how many times a sample can be replicated and diluted, and how many times the standard curve samples can be replicated as well.
 
-To tackle this, a few JS algorithms were created to generate plate combinations. A final set of data is created using each combination of samples, dilutions, replicates, blank wells, and standard curves, which is then used to create a visual of how the plate map might look with a particular combination.
+To tackle this, a few JS algorithms were created to generate plate combinations. A final set of data is created using each combination of samples, dilutions, replicates, blank wells, and standard curve replicates, which is then used to create a visual of how the plate map might look with a particular combination.
 
 This app is meant to take the guesswork out of creating plate assays when you're not sure how many times you can replicate or dilute a given number of samples.
 
@@ -41,11 +41,17 @@ This app is meant to take the guesswork out of creating plate assays when you're
 ### User Stories
 
 > As a user, I can input a sample number and see plate combinations.
+
 > As a user, I can choose a plate combination and see a visual of that plate.
+
 > As a user, I can save a chosen plate combination for later use.
+
 > As a user, I can sort combinations by dilutions, replicates, standard curve replicates, or well count.
+
 > As a user, I can see my saved plates in a list.
+
 > As a user, I can choose a saved plate and see the visual of that plate.
+
 > As a user, I can delete saved plates.
 
 
