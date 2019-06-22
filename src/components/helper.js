@@ -2,7 +2,7 @@ import * as d3 from "d3";
 
 export default {
 
-    generatePlateData: (plateDilution, plateSample, plateReplicates, scReps) => {
+    generatePlateData: (plateDilution, plateSample, plateReplicates, scReps, rotated) => {
         let colors = [
             'tomato', 'orange', 'violet', 'cornflowerblue',
             'slateblue', 'mediumseagreen', 'aqua', 'chartreuse',
@@ -47,7 +47,7 @@ export default {
             return dilutionData
         }
 
-        const standardCurveData = (scReps) => {
+        const standardCurveData = (scReps, rotated) => {
             let standards = [];
 
             for (let i = 0; i < scReps; i++) {
@@ -158,8 +158,6 @@ export default {
 
         let labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
-        labels = labels.reverse();
-
         let yScale = d3.scaleLinear()
             .domain([0, 7])
             .range([svgHeight - 120, 20]);
@@ -212,11 +210,17 @@ export default {
             grid.append('g')
                 .attr('class', 'axis')
                 .attr('transform', 'translate(50, 73)')
-                .call(xAxis);
+                .call(xAxis)
+                .selectAll('text')
+                    .attr('transform', 'rotate(90)')
+                    .attr('dx', -13)
+                    .attr('dy', 12)
 
             row.attr('transform', 'translate(50,100)');
 
         } else {
+            labels = labels.reverse();
+
             row.attr('transform', 'translate(98,50)');
 
             grid.append('g')
