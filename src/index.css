@@ -201,3 +201,7 @@ b {
     display: block;
     margin: 10px auto;
 }
+
+.sc-yellow {
+    max-width: 20px;
+}

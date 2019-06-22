@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import Helpers from './helper';
+import image from '../images/SC-Color.png';
 
 const API_URI = process.env.REACT_APP_BACKEND_URI;
 
@@ -63,7 +64,7 @@ class Plate extends Component {
                         <Card.Header as="h5">{this.state.plate.name}</Card.Header>
                         <ListGroup>
                             <ListGroup.Item>Samples: <b>{this.state.plate.samples}</b></ListGroup.Item>
-                            <ListGroup.Item>Standard Curve Reps: <b>{this.state.plate.sc_reps}</b></ListGroup.Item>
+                            <ListGroup.Item><img className="sc-yellow" src={image} alt="sc-color-yellow"/> Standard Curve Reps: <b>{this.state.plate.sc_reps}</b></ListGroup.Item>
                             <ListGroup.Item>Replicates: <b>{this.state.plate.replicates}</b></ListGroup.Item>
                             <ListGroup.Item>Dilutions: <b>{this.state.plate.dilutions}</b></ListGroup.Item>
                             <ListGroup.Item>Cell Count: <b>{this.state.plate.cellcount}</b></ListGroup.Item>

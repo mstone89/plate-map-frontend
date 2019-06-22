@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Form, Card, ListGroup } from 'react-bootstrap';
 import Helpers from './helper';
+import image from '../images/SC-Color.png';
 
 const API_URI = process.env.REACT_APP_BACKEND_URI;
 
@@ -19,6 +20,7 @@ class ViewGeneratedPlate extends Component {
 
     componentDidMount = () => {
         const path = this.props.location.pathname;
+        console.log(path);
         const parsePlate = path.split('/');
         const samples = parseInt(parsePlate[2]);
         const scReps = parseInt(parsePlate[3]);
@@ -102,7 +104,7 @@ class ViewGeneratedPlate extends Component {
                         <Card.Header as="h5">Generated Plate</Card.Header>
                         <ListGroup>
                             <ListGroup.Item>Samples: <b>{this.state.samples}</b></ListGroup.Item>
-                            <ListGroup.Item>Standard Curve Reps: <b>{this.state.scReps}</b></ListGroup.Item>
+                            <ListGroup.Item><img className="sc-yellow" src={image} alt="sc-color-yellow"/> Standard Curve Reps: <b>{this.state.scReps}</b></ListGroup.Item>
                             <ListGroup.Item>Replicates: <b>{this.state.replicates}</b></ListGroup.Item>
                             <ListGroup.Item>Dilutions: <b>{this.state.dilutions}</b></ListGroup.Item>
                             <ListGroup.Item>Cell Count: <b>{this.state.cellcount}</b></ListGroup.Item>
