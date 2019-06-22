@@ -38,6 +38,11 @@ To tackle this, a few JS algorithms were created to generate plate combinations.
 This app is meant to take the guesswork out of creating plate assays when you're not sure how many times you can replicate or dilute a given number of samples.
 
 
+### Wireframe
+
+![alt-text](https://github.com/mstone89/plate-map-frontend/blob/master/plate-map-wireframe.png)
+
+
 ### User Stories
 
 > As a user, I can input a sample number and see plate combinations.
