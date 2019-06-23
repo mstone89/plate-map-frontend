@@ -94,6 +94,7 @@ export default {
         return createFinalData(plateDilution, plateSample, plateReplicates, scReps);
     },
 
+    // Line 1 in RESOUCES.md
     generateGrid: (rows, columns, data) => {
         const finalizeGridData = (array) => {
             let finalArray = [];
@@ -155,7 +156,8 @@ export default {
     renderGrid: (data, width, height, id, shouldRotate) => {
         let svgWidth = width;
         let svgHeight = height;
-
+        
+        // Line 5 in RESOUCES.md
         let labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
         let yScale = d3.scaleLinear()
