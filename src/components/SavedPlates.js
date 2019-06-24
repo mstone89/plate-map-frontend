@@ -30,7 +30,7 @@ class SavedPlates extends Component {
 
     sortByCellCount = (array) => {
         this.setState({
-            combos: array.sort((a, b) => { return b.cellCount - a.cellCount })
+            combos: array.sort((a, b) => { return b.cellcount - a.cellcount })
         });
     }
 
