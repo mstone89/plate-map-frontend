@@ -45,9 +45,9 @@ class CreatePlate extends Component {
             <div className="main-container">
                 <aside>
                     <h2>How It Works</h2>
-                    <p>Sometimes the most difficult part of an experiment is that first step. Plate-Map is here to assit in planning out your assays without a lot of guesswork.  Simply input the number of samples you are testing, and Plate-Map does the rest.</p>
-                    <p>Plate-Map uses a typical 96 well plate format, with a 7 point standard curve (plus blank well), and up to 16 samples. With sample input, the app will suggest dilutions, replicates, and even well count, so you can maximize each and every experiment. It will offer two possible map options upon sample input.</p>
-                    <p>Plate-Map is an experimental planning tool that will save money and increase efficiency for costly and time consuming assay work, a must have for any modern lab.</p>
+                    <p>Sometimes the most difficult part of an experiment is the first step. Plate-Map is here to assist in planning out your microtiter assays without guesswork.  Simply input the number of samples you are testing, and Plate-Map does the rest.</p>
+                    <p>Plate-Map uses a typical 96-well plate format, with a 7 point standard curve (plus blank well), and up to 16 samples. With sample input, the app will suggest dilutions, replicates, and even well count, so you can maximize each and every experiment. It will offer two possible map options upon sample input.</p>
+                    <p>Plate-Map is an experimental planning tool that will save money and increase efficiency for costly and time consuming assay work, a must for any modern lab.</p>
                 </aside>
                 <div className="right-column">
                     <Form onSubmit={this.handleSubmit}>
